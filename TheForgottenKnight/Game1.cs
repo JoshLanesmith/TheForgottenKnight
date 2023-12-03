@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
@@ -29,6 +30,9 @@ namespace TheForgottenKnight
         public SpriteBatch SpriteBatch { get => _spriteBatch; set => _spriteBatch = value; }
 		public GameScene PreviousScene { get => previousScene; set => previousScene = value; }
 		public GameScene CurrentScene { get => currentScene; set => currentScene = value; }
+
+		//Menu SFX
+		private SoundEffect menuSelectSfx;
 
 		public Game1()
         {
@@ -68,12 +72,17 @@ namespace TheForgottenKnight
 			Shared.hilightFont = this.Content.Load<SpriteFont>("fonts/HilightFont");
 			Shared.labelFont = this.Content.Load<SpriteFont>("fonts/LabelFont");
 			Shared.smallFont = this.Content.Load<SpriteFont>("fonts/SmallFont");
+            Shared.titleFont = this.Content.Load<SpriteFont>("fonts/TitleFont");
+            Shared.menuBgImage = this.Content.Load<Texture2D>("images/start-menu-bgImage/bgImage");
+            
 
 			base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            //Menu sfx
+            menuSelectSfx = this.Content.Load<SoundEffect>("sfx/start-menu-sfx/menuSelect");
 
             // TODO: use this.Content to load your game content here
             player = new Player(this);
@@ -152,19 +161,22 @@ namespace TheForgottenKnight
                 selectedIndex = startScene.Menu.SelectedIndex;
                 if (selectedIndex == 0 && ks.IsKeyDown(Keys.Enter))
                 {
+                    menuSelectSfx.Play();
                     startScene.Hide();
                     PreviousScene = CurrentScene;
                     actionScene.Show();
                 }
                 else if (selectedIndex == 1 && ks.IsKeyDown(Keys.Enter))
                 {
-                    startScene.Hide();
+					menuSelectSfx.Play();
+					startScene.Hide();
                     PreviousScene = CurrentScene;
                     helpScene.Show();
                 }
                 else if (selectedIndex == 2 && ks.IsKeyDown(Keys.Enter))
                 {
-                    startScene.Hide();
+					menuSelectSfx.Play();
+					startScene.Hide();
                     PreviousScene = CurrentScene;
                     highScoreScene.Show();
                 }

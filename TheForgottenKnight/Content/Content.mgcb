@@ -41,6 +41,13 @@
 /processorParam:TextureFormat=Compressed
 /build:fonts/SmallFont.spritefont
 
+#begin fonts/TitleFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/TitleFont.spritefont
+
 #begin images/Ball.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -89,6 +96,18 @@
 /processorParam:TextureFormat=Color
 /build:images/save_red.png
 
+#begin images/start-menu-bgImage/bgImage.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/start-menu-bgImage/bgImage.png
+
 #begin maps/tilesets/Dungeon_Tileset.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -136,4 +155,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/tilesets/right_arched_door_tileset.png
+
+#begin sfx/start-menu-sfx/menuHover.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/start-menu-sfx/menuHover.wav
+
+#begin sfx/start-menu-sfx/menuSelect.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/start-menu-sfx/menuSelect.wav
 

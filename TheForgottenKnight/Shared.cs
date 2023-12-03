@@ -19,9 +19,11 @@ namespace TheForgottenKnight
         public static SpriteFont hilightFont;
         public static SpriteFont labelFont;
         public static SpriteFont smallFont;
+        public static SpriteFont titleFont;
         public static Vector2 displayPosShift;
         public static Vector2 gameDisplaySize;
 		public static int numberOfHighScoresStored = 10;
+        public static Texture2D menuBgImage;
 
 	}
 }
