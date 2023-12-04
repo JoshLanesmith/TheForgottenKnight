@@ -30,37 +30,38 @@ namespace TheForgottenKnight
 	/// </summary>
 	public class Map : DrawableGameComponent
     {
-		private TiledMap map;
-		private List<Tileset> tilesets;
-		private List<FloorLayer> floorLayers;
-		private List<CollisionLayer> collisionLayers;
-		private List<PushableObject> pushableObjects;
-		private List<PickupObject> pickupObjects;
-		private List<Door> doors;
-		private PlayerObject playerObject;
-		private Bag bag;
-		private PickupObject? levelKey;
-		private Door levelCompleteDoor;
-		private float timerStartTime = 50;
-		private CountDownTimer countDownTimer;
-		private LevelStatus levelStatus;
-		private LevelStatus previousLevleStatus;
-		private int tileWidth;
-		private int tileHeight;
-		private float mapScaleFactor;
+		protected TiledMap map;
+		protected List<Tileset> tilesets;
+		protected List<FloorLayer> floorLayers;
+		protected List<CollisionLayer> collisionLayers;
+		protected List<PushableObject> pushableObjects;
+		protected List<PickupObject> pickupObjects;
+		protected List<Door> doors;
+		protected PlayerObject playerObject;
+		protected Bag bag;
+		protected PickupObject? levelKey;
+		protected Door levelCompleteDoor;
+		protected float timerStartTime = 50;
+		protected CountDownTimer countDownTimer;
+		protected LevelStatus levelStatus;
+		protected LevelStatus previousLevleStatus;
+		protected int tileWidth;
+		protected int tileHeight;
+		protected float mapScaleFactor;
 
 		public List<GameComponent> Components { get; set; }
 		public List<CollisionLayer> CollisionLayers { get => collisionLayers; set => collisionLayers = value; }
 		public List<PushableObject> PushableObjects { get => pushableObjects; set => pushableObjects = value; }
 		public List<PickupObject> PickupObjects { get => pickupObjects; set => pickupObjects = value; }
 		public List<Door> Doors { get => doors; set => doors = value; }
-		internal Bag Bag { get => bag; set => bag = value; }
+		public Bag Bag { get => bag; set => bag = value; }
 		public PickupObject LevelKey { get => levelKey; set => levelKey = value; }
 		public LevelStatus CurrentLevelStatus { get => levelStatus; set => levelStatus = value; }
 		public LevelStatus PreviousLevleStatus { get => previousLevleStatus; set => previousLevleStatus = value; }
 		public float TimerStartTime { get => timerStartTime; set => timerStartTime = value; }
 		public CountDownTimer CountDownTimer { get => countDownTimer; set => countDownTimer = value; }
 		public float MapScaleFactor { get => mapScaleFactor; set => mapScaleFactor = value; }
+		public int TileWidth { get => tileWidth; set => tileWidth = value; }
 
 		/// <summary>
 		/// Create the map level based on the TiledMap being loaded up
@@ -73,7 +74,7 @@ namespace TheForgottenKnight
 			
 			// Set general map details
 			this.map = map;
-			tileWidth = map.TileWidth;
+			TileWidth = map.TileWidth;
 			tileHeight = map.TileHeight;
 			mapScaleFactor = Shared.gameDisplaySize.X / (float)(map.Width * map.TileWidth);
 			Debug.WriteLine(mapScaleFactor);
@@ -82,11 +83,11 @@ namespace TheForgottenKnight
 			tilesets = LoadTilesets();
 			floorLayers = LoadFloorLayers();
 			collisionLayers = LoadCollisionLayer();
-			pushableObjects = LoadPushableObjects();
 			pickupObjects = LoadPickupObjects();
 			doors = LoadDoors();
+			pushableObjects = LoadPushableObjects();
 			playerObject = LoadPlayerObject();
-			bag = new Bag(game);
+			bag = new Bag(game,this);
 			Components.Add(bag);
 			
 			// Setup properties used to track the level status and level completion
@@ -99,11 +100,13 @@ namespace TheForgottenKnight
 
 		}
 
+		#region LoadComponents
+
 		/// <summary>
 		/// Load all tilesets used in the current map based on the .tmx file
 		/// </summary>
 		/// <returns>Returns a List<Tileset> to be used by other map components for drawing</returns>
-		private List<Tileset> LoadTilesets()
+		protected List<Tileset> LoadTilesets()
 		{
 			List<Tileset> tilesets = new List<Tileset>();
 
@@ -131,7 +134,7 @@ namespace TheForgottenKnight
 		/// Load the floor layers for the map based on the .tmx file
 		/// </summary>
 		/// <returns>Returns a List<FloorLayer></returns>
-		private List<FloorLayer> LoadFloorLayers()
+		protected List<FloorLayer> LoadFloorLayers()
 		{
 			List<FloorLayer> floorLayers = new List<FloorLayer>();
 
@@ -158,7 +161,7 @@ namespace TheForgottenKnight
 		/// Load the collision layers for the map based on the .tmx file
 		/// </summary>
 		/// <returns>Returns a List<CollisionLayer></returns>
-		private List<CollisionLayer> LoadCollisionLayer()
+		protected List<CollisionLayer> LoadCollisionLayer()
 		{
 			List<CollisionLayer> collisionLayers = new List<CollisionLayer>();
 
@@ -185,7 +188,7 @@ namespace TheForgottenKnight
 		/// Load the pushable objects for the map based on the .tmx file 
 		/// </summary>
 		/// <returns>Returns a List<PushableObject></returns>
-		private List<PushableObject> LoadPushableObjects()
+		protected List<PushableObject> LoadPushableObjects()
 		{
 			List<PushableObject> pushableObjects = new List<PushableObject>();
 
@@ -247,7 +250,7 @@ namespace TheForgottenKnight
 		/// Load the pickup objects for the map based on the .tmx file 
 		/// </summary>
 		/// <returns>Returns a List<PickupObject></returns>
-		private List<PickupObject> LoadPickupObjects()
+		protected List<PickupObject> LoadPickupObjects()
 		{
 			List<PickupObject> pickupObjects = new List<PickupObject>();
 
@@ -328,7 +331,7 @@ namespace TheForgottenKnight
 		/// Load the door objects for the map based on the .tmx file 
 		/// </summary>
 		/// <returns>Returns a List<Door></returns>
-		private List<Door> LoadDoors()
+		protected List<Door> LoadDoors()
 		{
 			List<Door> doors = new List<Door>();
 
@@ -410,7 +413,7 @@ namespace TheForgottenKnight
 		/// Load the player object for the map based on the .tmx file
 		/// </summary>
 		/// <returns>Returns a PlayerObject</returns>
-		private PlayerObject LoadPlayerObject()
+		protected PlayerObject LoadPlayerObject()
 		{
 			// Load the texture, define the initial position, create the player object, and add it to the map components
 			// Player			
@@ -434,6 +437,32 @@ namespace TheForgottenKnight
 			this.Components.Add(ball);
 
 			return ball;
+		}
+
+		#endregion
+
+		public void ResetMap()
+		{
+			playerObject.ResetPlayer();
+			bag.ResetBag();
+			
+			foreach(PickupObject item in PickupObjects)
+			{
+				item.ResetPosition();
+			}
+
+			foreach (Door door in Doors)
+			{
+				door.ResetPosition();
+			}
+
+			foreach (PushableObject item in PushableObjects)
+			{
+				item.ResetPosition();
+			}
+
+			CurrentLevelStatus = LevelStatus.Running;
+			PreviousLevleStatus = LevelStatus.Running;
 		}
 
 		public override void Update(GameTime gameTime)

@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 
 namespace TheForgottenKnight.MapComponents
 {
-    public class PushableObject : AbstractInteractiveObject
+    public class PushableObject : BaseInteractiveObject
     {
         private float scale = 1;
 
         private List<CollisionLayer> collisionLayers;
+		private List<PickupObject> pickupObjects;
+		private List<Door> doors;
 
 		/// <summary>
 		/// Create a pushable object
@@ -30,7 +32,9 @@ namespace TheForgottenKnight.MapComponents
 		public PushableObject(Game game, Map map, Texture2D tex, int width, int height, int tilesetRow, int tilesetColumn, float startingX, float startingY)
 			: base(game, map, tex, width, height, tilesetRow, tilesetColumn, startingX, startingY)
 		{
-			this.collisionLayers = map.CollisionLayers;
+			collisionLayers = map.CollisionLayers;
+            pickupObjects = map.PickupObjects;
+            doors = map.Doors;
 		}
 
 		/// <summary>
@@ -78,6 +82,21 @@ namespace TheForgottenKnight.MapComponents
                     return true;
                 }
             }
+            foreach (PickupObject item in pickupObjects)
+            {
+                if (item.GetBounds().Intersects(GetBounds()))
+                {
+                    return true;
+                }
+            }
+            foreach (Door door in doors)
+            {
+                if (door.GetBounds().Intersects(GetBounds()))
+                {
+                    return true;
+                }
+            }
+
 
             return false;
         }

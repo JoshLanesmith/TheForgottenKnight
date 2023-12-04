@@ -28,6 +28,7 @@ namespace TheForgottenKnight.MapComponents
 
 		//Movement
 		public Vector2 position;
+        public Vector2 originalPosition;
 		private float moveSpeed = 1.5f;
 
 		//Animations
@@ -57,7 +58,8 @@ namespace TheForgottenKnight.MapComponents
 		public PlayerObject(Game game, Map map, Texture2D[] animationSheet, Vector2 position) : base(game)
         {
             this.animationSheet = animationSheet;
-            this.position = position * map.MapScaleFactor + Shared.displayPosShift;
+            this.position = position;
+            originalPosition = this.position;
             this.map = map;
             collisionLayers = map.CollisionLayers;
             pushableObjects = map.PushableObjects;
@@ -110,7 +112,7 @@ namespace TheForgottenKnight.MapComponents
 			currentAnimation = currentIdle;
 
 			KeyboardState keyboardstate = Keyboard.GetState();
-            if (keyboardstate.IsKeyDown(Keys.Right))//Move right
+            if (keyboardstate.IsKeyDown(Keys.D))//Move right
             {
                 position.X += moveSpeed;
 				currentAnimation = playerWalk[3];
@@ -132,7 +134,7 @@ namespace TheForgottenKnight.MapComponents
                 }
 
             }
-            if (keyboardstate.IsKeyDown(Keys.Left))//Move left
+            if (keyboardstate.IsKeyDown(Keys.A))//Move right
             {
                 position.X -= moveSpeed;
 				currentAnimation = playerWalk[2];
@@ -153,7 +155,7 @@ namespace TheForgottenKnight.MapComponents
                     }
                 }
             }
-            if (keyboardstate.IsKeyDown(Keys.Up))//Move Up
+            if (keyboardstate.IsKeyDown(Keys.W))//Move right
             {
                 position.Y -= moveSpeed;
 				currentAnimation = playerWalk[1];
@@ -175,7 +177,7 @@ namespace TheForgottenKnight.MapComponents
                     }
                 }
             }
-            if (keyboardstate.IsKeyDown(Keys.Down))//Move Down
+            if (keyboardstate.IsKeyDown(Keys.S))//Move right
             {
                 position.Y += moveSpeed;
 				currentAnimation = playerWalk[0];
@@ -252,7 +254,7 @@ namespace TheForgottenKnight.MapComponents
 			{
 				if (door.GetBounds().Intersects(GetBounds()))
 				{
-                    if (!door.IsUnlocked)
+                    if (!door.IsUnlocked && map.Bag.BagItems.Contains(map.LevelKey))
 					{
 						foreach (Door lockedDoor in doors)
 						{
@@ -309,5 +311,9 @@ namespace TheForgottenKnight.MapComponents
 
 			soundEffects[randomIndex]?.Play();
 		}
-	}
+        public void ResetPlayer()
+        {
+            position = originalPosition;
+        }
+    }
 }
