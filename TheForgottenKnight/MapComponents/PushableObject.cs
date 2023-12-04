@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct2D1.Effects;
 using System;
@@ -16,6 +17,8 @@ namespace TheForgottenKnight.MapComponents
         private List<CollisionLayer> collisionLayers;
 		private List<PickupObject> pickupObjects;
 		private List<Door> doors;
+     
+       
 
 		/// <summary>
 		/// Create a pushable object
@@ -35,6 +38,8 @@ namespace TheForgottenKnight.MapComponents
 			collisionLayers = map.CollisionLayers;
             pickupObjects = map.PickupObjects;
             doors = map.Doors;
+            /*doorOpen = game.Content.Load<SoundEffect>("sfx/object-sfx/door_open");*/
+
 		}
 
 		/// <summary>
@@ -56,6 +61,7 @@ namespace TheForgottenKnight.MapComponents
             {
                 position = initPos;
                 hitObject = true;
+               
             }
         }
 
@@ -70,8 +76,8 @@ namespace TheForgottenKnight.MapComponents
                 foreach (Rectangle rectangle in layer.CollisionObjects)
                 {
                     if (rectangle.Intersects(GetBounds()))
-                    {
-                        return true;
+                    { 
+						return true;
                     }
                 }
             }

@@ -180,6 +180,42 @@
 /processorParam:TextureFormat=Color
 /build:maps/tilesets/right_arched_door_tileset.png
 
+#begin maps/tilesets/TheForgottenKnight_Help.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:maps/tilesets/TheForgottenKnight_Help.png
+
+#begin sfx/object-sfx/crate_push_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/object-sfx/crate_push_1.wav
+
+#begin sfx/object-sfx/crate_push_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/object-sfx/crate_push_2.wav
+
+#begin sfx/object-sfx/door_open.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/object-sfx/door_open.wav
+
+#begin sfx/object-sfx/pickup_key.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sfx/object-sfx/pickup_key.wav
+
 #begin sfx/player-sfx/walk_1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -233,15 +269,4 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx/start-menu-sfx/menuSelect.wav
-#begin maps/tilesets/TheForgottenKnight_Help.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:maps/tilesets/TheForgottenKnight_Help.png
 
