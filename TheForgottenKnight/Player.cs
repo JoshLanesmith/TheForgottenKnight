@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace TheForgottenKnight
 	/// </summary>
 	public class Player : GameComponent
 	{
+
+
+		//Player Information
 		private float timeSpent;
 		private int levelsCompleted;
 		private string? playerName;
