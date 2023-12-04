@@ -15,7 +15,6 @@ namespace TheForgottenKnight.Scenes
 {
 	public class ActionScene : GameScene
 	{
-		//private Bat bat;
 		private Map currentLevelMap;
 		private int numberOfLevels;
 		private int currentLevelIndex;

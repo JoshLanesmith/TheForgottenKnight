@@ -413,7 +413,9 @@ namespace TheForgottenKnight
 		private PlayerObject LoadPlayerObject()
 		{
 			// Load the texture, define the initial position, create the player object, and add it to the map components
-			Texture2D ballTex = Game.Content.Load<Texture2D>("images/Ball");
+			// Player			
+			Texture2D[] playerAnimations = new Texture2D[] { Game.Content.Load<Texture2D>("images/player-spritesheet/Idle"), Game.Content.Load<Texture2D>("images/player-spritesheet/Walk") };
+			
 
 			Vector2 playerStartPosition = new Vector2();
 			if (map.Layers.Count() == 1 && map.Layers[0].objects.Count() == 1)
@@ -424,11 +426,11 @@ namespace TheForgottenKnight
 			}
 			else
 			{
-				playerStartPosition.X = Shared.stage.X / 2 - ballTex.Width / 2;
-				playerStartPosition.Y = Shared.stage.Y / 2 - ballTex.Height / 2;
+				playerStartPosition.X = Shared.stage.X / 2 - playerAnimations[0].Width / 2;
+				playerStartPosition.Y = Shared.stage.Y / 2 - playerAnimations[0].Height / 2;
 			}
 
-			PlayerObject ball = new PlayerObject(Game, this, ballTex, playerStartPosition);
+			PlayerObject ball = new PlayerObject(Game, this, playerAnimations, playerStartPosition);
 			this.Components.Add(ball);
 
 			return ball;
