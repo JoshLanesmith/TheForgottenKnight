@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace TheForgottenKnight.MapComponents
 {
-	public class Door : AbstractInteractiveObject
+	public class Door : BaseInteractiveObject
 	{
 		private bool isUnlocked;
 		private bool isLevelCompleteDoor;
@@ -60,6 +60,12 @@ namespace TheForgottenKnight.MapComponents
 				tilesetColumn += 1;
 				tilesetRec = new Rectangle(width * tilesetColumn, height * tilesetRow, width, height); 
 			}
+		}
+
+		public override void ResetPosition()
+		{
+			isUnlocked = false;
+			base.ResetPosition();
 		}
 
 		public override void Update(GameTime gameTime)

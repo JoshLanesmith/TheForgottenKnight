@@ -22,7 +22,7 @@ namespace TheForgottenKnight.Scenes
 		private Player player;
 		private bool gameOver;
 		private float delay = 0;
-		private bool trigger = false;
+		private bool timerTrigger = false;
 
 
 		public ActionScene(Game game, Player player) : base(game)
@@ -58,7 +58,7 @@ namespace TheForgottenKnight.Scenes
 
 				if (currentLevelIndex < numberOfLevels)
 				{
-					if (!trigger)
+					if (!timerTrigger)
 					{
 						WaitTime(1);
 					}
@@ -76,13 +76,13 @@ namespace TheForgottenKnight.Scenes
 			}
 
 			if (delay > 0) delay -= 1f / 1000f * (float)gameTime.ElapsedGameTime.Milliseconds;
-			if (delay <= 0 && trigger)
+			if (delay <= 0 && timerTrigger)
 			{
 				Components.Remove(currentLevelMap);
 				currentLevelIndex++;
 				currentLevelMap = new Map(Game, mapLevels[currentLevelIndex]);
 				Components.Add(currentLevelMap);
-				trigger = false;
+				timerTrigger = false;
 			}
 
 			base.Update(gameTime);
@@ -106,7 +106,7 @@ namespace TheForgottenKnight.Scenes
 		private void WaitTime(float amountoftime)
 		{
 			delay = amountoftime;
-			trigger = true;
+			timerTrigger = true;
 		}
 	}
 }

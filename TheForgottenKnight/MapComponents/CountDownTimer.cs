@@ -19,6 +19,7 @@ namespace TheForgottenKnight.MapComponents
 		private string labelText = "Timer";
 		private Color labelColor = Color.White;
 		private float countDownTime;
+		private float startCountDownTime;
 
 		public float CountDownTime { get => countDownTime; }
 
@@ -34,6 +35,21 @@ namespace TheForgottenKnight.MapComponents
 			this.font = Shared.labelFont;
 			position = new Vector2(16, 0);
 			this.countDownTime = countDownTime;
+			startCountDownTime = countDownTime;
+		}
+
+		public CountDownTimer(Game game, Map map, float countDownTime, Vector2 position) : base(game)
+		{
+			this.map = map;
+			this.font = Shared.labelFont;
+			this.position = position;
+			this.countDownTime = countDownTime;
+			startCountDownTime = countDownTime;
+		}
+
+		public void ResetTimer()
+		{
+			countDownTime = startCountDownTime;
 		}
 
 		public override void Update(GameTime gameTime)
@@ -47,6 +63,7 @@ namespace TheForgottenKnight.MapComponents
 			// Set the CurrentLevelStatus as Lost if the timer reaches zero
 			if (countDownTime <= 0)
 			{
+				countDownTime = 0.0f;
 				map.CurrentLevelStatus = LevelStatus.Lost;
 			}
 

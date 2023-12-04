@@ -12,7 +12,7 @@ namespace TheForgottenKnight.MapComponents
 	/// <summary>
 	/// 
 	/// </summary>
-	public class PickupObject : AbstractInteractiveObject
+	public class PickupObject : BaseInteractiveObject
 	{
 		private bool isLevelKey;
 

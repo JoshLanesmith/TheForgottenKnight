@@ -53,11 +53,11 @@ namespace TheForgottenKnight.MapComponents
                 }
 
                 // Calculate the X and Y positions for the object
-                float x = i % mapRows * tileWidth * map.MapScaleFactor;
-                float y = (float)Math.Floor(i / (double)mapRows) * tileHeight * map.MapScaleFactor;
+                float x = i % mapRows * tileWidth;
+                float y = (float)Math.Floor(i / (double)mapRows) * tileHeight;
 
                 // Create the object's Rectagle and add it to the list of collision objects
-                Rectangle collisionObject = new Rectangle((int)(x + Shared.displayPosShift.X), (int)(y + Shared.displayPosShift.Y), tileWidth, tileHeight);
+                Rectangle collisionObject = new Rectangle((int)x, (int)y, tileWidth, tileHeight);
                 collisionObjects.Add(collisionObject);
             }
 

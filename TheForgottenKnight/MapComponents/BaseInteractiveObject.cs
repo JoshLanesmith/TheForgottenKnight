@@ -11,13 +11,15 @@ namespace TheForgottenKnight.MapComponents
 	/// <summary>
 	/// Abstract class used for all interactive map objects that can move and be collided with
 	/// </summary>
-	public abstract class AbstractInteractiveObject : DrawableGameComponent
+	public abstract class BaseInteractiveObject : DrawableGameComponent
 	{
 		protected int tiledEditorObjectOriginAdjustment;
 		protected Map map;
 		protected Texture2D tex;
 		protected float originalX;
 		protected float originalY;
+		protected int originalTilesetRow;
+		protected int originalTilesetColumn;
 		protected int width;
 		protected int height;
 		protected int tilesetRow;
@@ -29,7 +31,7 @@ namespace TheForgottenKnight.MapComponents
 		/// Defaule constructor creates and empty object
 		/// </summary>
 		/// <param name="game">The game context for the object</param>
-		public AbstractInteractiveObject(Game game) : base(game)
+		public BaseInteractiveObject(Game game) : base(game)
 		{
 
 		}
@@ -46,7 +48,7 @@ namespace TheForgottenKnight.MapComponents
 		/// <param name="tilesetColumn">The column of the tileset frame to use</param>
 		/// <param name="startingX">The X value of the objects starting position</param>
 		/// <param name="startingY">The Y value of the objects starting position</param>
-		public AbstractInteractiveObject(Game game, Map map, Texture2D tex,
+		public BaseInteractiveObject(Game game, Map map, Texture2D tex,
 			 int width, int height, int tilesetRow, int tilesetColumn, float startingX, float startingY) : base(game)
 		{
 			this.map = map;
@@ -55,21 +57,13 @@ namespace TheForgottenKnight.MapComponents
 			this.height = height;
 			this.tilesetRow = tilesetRow;
 			this.tilesetColumn = tilesetColumn;
+			originalTilesetRow = tilesetRow;
+			originalTilesetColumn = tilesetColumn;
 			tiledEditorObjectOriginAdjustment = -height;
 			this.originalX = startingX;
 			this.originalY = startingY + tiledEditorObjectOriginAdjustment;
-			position = new Vector2(this.originalX * map.MapScaleFactor, this.originalY * map.MapScaleFactor) + Shared.displayPosShift;
+			position = new Vector2(originalX, originalY);
 			tilesetRec = new Rectangle(width * tilesetColumn, height * tilesetRow, width, height);
-		}
-
-		public override void Draw(GameTime gameTime)
-		{
-			Shared.sb.Begin();
-			Shared.sb.Draw(tex, position, tilesetRec, Color.White);
-			Shared.sb.Draw(tex, position, tilesetRec, Color.White, 0f, new Vector2(), map.MapScaleFactor, SpriteEffects.None, 0);
-
-			Shared.sb.End();
-			base.Draw(gameTime);
 		}
 
 		/// <summary>
@@ -79,6 +73,24 @@ namespace TheForgottenKnight.MapComponents
 		public Rectangle GetBounds()
 		{
 			return new Rectangle((int)position.X, (int)position.Y, width, height);
+		}
+
+		public virtual void ResetPosition()
+		{
+			tilesetRow = originalTilesetRow;
+			tilesetColumn = originalTilesetColumn;
+			tilesetRec = new Rectangle(width * tilesetColumn, height * tilesetRow, width, height);
+			position = new Vector2(this.originalX , this.originalY);
+		}
+
+		public override void Draw(GameTime gameTime)
+		{
+			Shared.sb.Begin();
+			//Shared.sb.Draw(tex, position, tilesetRec, Color.White);
+			Shared.sb.Draw(tex, position * map.MapScaleFactor + Shared.displayPosShift, tilesetRec, Color.White, 0f, new Vector2(), map.MapScaleFactor, SpriteEffects.None, 0);
+
+			Shared.sb.End();
+			base.Draw(gameTime);
 		}
 	}
 }

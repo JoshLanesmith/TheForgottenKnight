@@ -19,6 +19,7 @@ namespace TheForgottenKnight.MapComponents
         private Map map;
         private Texture2D tex;
         public Vector2 position;
+        public Vector2 originalPosition;
         private float moveSpeed = 1.5f;
         private float scale = 0.25f;
 
@@ -30,19 +31,21 @@ namespace TheForgottenKnight.MapComponents
         public PlayerObject(Game game, Map map, Texture2D tex, Vector2 position) : base(game)
         {
             this.tex = tex;
-            this.position = position * map.MapScaleFactor + Shared.displayPosShift;
+            this.position = position;
+            originalPosition = this.position;
             this.map = map;
             collisionLayers = map.CollisionLayers;
             pushableObjects = map.PushableObjects;
             pickupObjects = map.PickupObjects;
             doors = map.Doors;
         }
+
         public override void Update(GameTime gameTime)
         {
             Vector2 initPos = position;
 
             KeyboardState keyboardstate = Keyboard.GetState();
-            if (keyboardstate.IsKeyDown(Keys.Right))//Move right
+            if (keyboardstate.IsKeyDown(Keys.D))//Move right
             {
                 position.X += moveSpeed;
 
@@ -61,7 +64,7 @@ namespace TheForgottenKnight.MapComponents
                 }
 
             }
-            if (keyboardstate.IsKeyDown(Keys.Left))//Move right
+            if (keyboardstate.IsKeyDown(Keys.A))//Move right
             {
                 position.X -= moveSpeed;
 
@@ -79,7 +82,7 @@ namespace TheForgottenKnight.MapComponents
                     }
                 }
             }
-            if (keyboardstate.IsKeyDown(Keys.Up))//Move right
+            if (keyboardstate.IsKeyDown(Keys.W))//Move right
             {
                 position.Y -= moveSpeed;
 
@@ -97,7 +100,7 @@ namespace TheForgottenKnight.MapComponents
                     }
                 }
             }
-            if (keyboardstate.IsKeyDown(Keys.Down))//Move right
+            if (keyboardstate.IsKeyDown(Keys.S))//Move right
             {
                 position.Y += moveSpeed;
 
@@ -128,7 +131,8 @@ namespace TheForgottenKnight.MapComponents
         public override void Draw(GameTime gameTime)
         {
             Shared.sb.Begin();
-			Shared.sb.Draw(tex, position, new Rectangle(0, 0, tex.Width, tex.Height), Color.White, 0.0f, new Vector2(), scale * map.MapScaleFactor, SpriteEffects.None, 0f);
+			Shared.sb.Draw(tex, position * map.MapScaleFactor + Shared.displayPosShift, new Rectangle(0, 0, tex.Width, tex.Height), 
+                Color.White, 0.0f, new Vector2(), scale * map.MapScaleFactor, SpriteEffects.None, 0f);
 			Shared.sb.End();
             base.Draw(gameTime);
         }
@@ -155,7 +159,7 @@ namespace TheForgottenKnight.MapComponents
 			{
 				if (door.GetBounds().Intersects(GetBounds()))
 				{
-                    if (!door.IsUnlocked)
+                    if (!door.IsUnlocked && map.Bag.BagItems.Contains(map.LevelKey))
 					{
 						foreach (Door lockedDoor in doors)
 						{
@@ -201,6 +205,9 @@ namespace TheForgottenKnight.MapComponents
 			return false;
 		}
 
-        
+        public void ResetPlayer()
+        {
+            position = originalPosition;
+        }
     }
 }
