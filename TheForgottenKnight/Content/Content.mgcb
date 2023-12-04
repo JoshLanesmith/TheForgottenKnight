@@ -180,7 +180,6 @@
 /processorParam:TextureFormat=Color
 /build:maps/tilesets/right_arched_door_tileset.png
 
-<<<<<<< HEAD
 #begin sfx/player-sfx/walk_1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -234,7 +233,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sfx/start-menu-sfx/menuSelect.wav
-=======
 #begin maps/tilesets/TheForgottenKnight_Help.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -246,5 +244,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:maps/tilesets/TheForgottenKnight_Help.png
->>>>>>> feature/help-scene
 

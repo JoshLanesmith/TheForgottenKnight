@@ -18,7 +18,7 @@ namespace TheForgottenKnight.MapComponents
     {
         private Map map;
         private Texture2D[] animationSheet;
-        private float scale = 0.25f;
+        private float collisionBoxScale = 0.95f;
 
         //List Components
 		private List<CollisionLayer> collisionLayers;
@@ -36,6 +36,8 @@ namespace TheForgottenKnight.MapComponents
 		private Animator[] playerWalk;
 		private Animator currentAnimation;
 		private Animator currentIdle;
+        private int tileWidth;
+        private int tileHeight;
 
 		//AnimationSheets
 		private Texture2D playerIdleSheet;
@@ -70,22 +72,24 @@ namespace TheForgottenKnight.MapComponents
 			//Create new animator
 			playerIdle = new Animator[4];
 			playerWalk = new Animator[4];
+            tileWidth = 16;
+            tileHeight = 16;
 
-			//Assign Sheets
-			playerIdleSheet = animationSheet[0];
+            //Assign Sheets
+            playerIdleSheet = animationSheet[0];
 			playerWalkSheet = animationSheet[1];
 
 			//Idling 
-			playerIdle[0] = new Animator(playerIdleSheet, 0, 16, 16); //Down
-			playerIdle[1] = new Animator(playerIdleSheet, 1, 16, 16); //Up
-			playerIdle[2] = new Animator(playerIdleSheet, 2, 16, 16); //Left
-			playerIdle[3] = new Animator(playerIdleSheet, 3, 16, 16); //Right
+			playerIdle[0] = new Animator(map, playerIdleSheet, 0, tileWidth, tileHeight); //Down
+			playerIdle[1] = new Animator(map, playerIdleSheet, 1, tileWidth, tileHeight); //Up
+			playerIdle[2] = new Animator(map, playerIdleSheet, 2, tileWidth, tileHeight); //Left
+			playerIdle[3] = new Animator(map, playerIdleSheet, 3, tileWidth, tileHeight); //Right
 
 			//Walking
-			playerWalk[0] = new Animator(playerWalkSheet, 0, 16, 16);//Down
-			playerWalk[1] = new Animator(playerWalkSheet, 1, 16, 16); //Up
-			playerWalk[2] = new Animator(playerWalkSheet, 2, 16, 16); //Left
-			playerWalk[3] = new Animator(playerWalkSheet, 3, 16, 16); //Right
+			playerWalk[0] = new Animator(map, playerWalkSheet, 0, tileWidth, tileHeight);//Down
+			playerWalk[1] = new Animator(map, playerWalkSheet, 1, tileWidth, tileHeight); //Up
+			playerWalk[2] = new Animator(map, playerWalkSheet, 2, tileWidth, tileHeight); //Left
+			playerWalk[3] = new Animator(map, playerWalkSheet, 3, tileWidth, tileHeight); //Right
 
 			//Default Idle
 			currentIdle = playerIdle[0];
@@ -234,7 +238,7 @@ namespace TheForgottenKnight.MapComponents
 
         public Rectangle GetBounds()
         {
-            return new Rectangle((int)position.X, (int)position.Y, (int)(animationSheet[0].Width * scale), (int)(animationSheet[0].Height * scale));
+            return new Rectangle((int)position.X, (int)position.Y, (int)(tileWidth * collisionBoxScale), (int)(tileHeight * collisionBoxScale));
         }
 
         private bool IsColliding()

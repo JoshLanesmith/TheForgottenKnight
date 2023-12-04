@@ -433,10 +433,10 @@ namespace TheForgottenKnight
 				playerStartPosition.Y = Shared.stage.Y / 2 - playerAnimations[0].Height / 2;
 			}
 
-			PlayerObject ball = new PlayerObject(Game, this, playerAnimations, playerStartPosition);
-			this.Components.Add(ball);
+			PlayerObject player = new PlayerObject(Game, this, playerAnimations, playerStartPosition);
+			this.Components.Add(player);
 
-			return ball;
+			return player;
 		}
 
 		#endregion

@@ -19,6 +19,7 @@ namespace TheForgottenKnight
 	/// </summary>
 	public class Animator
 	{
+		private Map map;
 		private Texture2D animationSheet;
 		private int column;
 		private int width;
@@ -34,8 +35,9 @@ namespace TheForgottenKnight
 		/// <param name="column">The direction which the animation will parse the document</param>
 		/// <param name="width">each sprits dimension eg.16x16 for width</param>
 		/// <param name="height">each sprits dimension eg.16x16 for Height</param>
-		public Animator(Texture2D animationSheet, int column, int width, int height)
+		public Animator(Map map, Texture2D animationSheet, int column, int width, int height)
 		{
+			this.map = map;
 			this.animationSheet = animationSheet;
 			this.column = column;
 			this.width = width;
@@ -58,7 +60,8 @@ namespace TheForgottenKnight
 
 			if (c < frames)
 			{
-				spriteBatch.Draw(animationSheet, position, new Rectangle(width * column, height * c, 16, 16), Color.White);
+				spriteBatch.Draw(animationSheet, position * map.MapScaleFactor + Shared.displayPosShift, new Rectangle(width * column, height * c, width, height),
+					Color.White, 0.0f, Vector2.Zero, map.MapScaleFactor, SpriteEffects.None, 0);
 				timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
 
 				if (timeSinceLastFrame > animationSpeed)
