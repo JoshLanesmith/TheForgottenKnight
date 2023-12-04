@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System.Diagnostics;
 using System.Threading;
 using TheForgottenKnight.Scenes;
@@ -9,25 +10,25 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace TheForgottenKnight
 {
-    public class Game1 : Game
-    {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private Player player;
+	public class Game1 : Game
+	{
+		private GraphicsDeviceManager _graphics;
+		private SpriteBatch _spriteBatch;
+		private Player player;
 		private float delay = 0;
 		private bool trigger = false;
-        private GameScene? previousScene;
+		private GameScene? previousScene;
 		private GameScene? currentScene;
-
+		private bool isPlayingSong = false;
 
 		// Declare all scenes here
 		private StartScene startScene;
-        private HelpScene helpScene;
-        private ActionScene actionScene;
-        private EndScene endScene;
-        private HighScoreScene highScoreScene;
+		private HelpScene helpScene;
+		private ActionScene actionScene;
+		private EndScene endScene;
+		private HighScoreScene highScoreScene;
 
-        public SpriteBatch SpriteBatch { get => _spriteBatch; set => _spriteBatch = value; }
+		public SpriteBatch SpriteBatch { get => _spriteBatch; set => _spriteBatch = value; }
 		public GameScene PreviousScene { get => previousScene; set => previousScene = value; }
 		public GameScene CurrentScene { get => currentScene; set => currentScene = value; }
 
@@ -35,16 +36,16 @@ namespace TheForgottenKnight
 		private SoundEffect menuSelectSfx;
 
 		public Game1()
-        {
-            _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-        }
+		{
+			_graphics = new GraphicsDeviceManager(this);
+			Content.RootDirectory = "Content";
+			IsMouseVisible = true;
+		}
 
-        protected override void Initialize()
-        {
-            int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            int screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+		protected override void Initialize()
+		{
+			int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+			int screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
 			// TODO: Add your initialization logic here
 			_graphics.IsFullScreen = true;
@@ -52,18 +53,18 @@ namespace TheForgottenKnight
 			_graphics.PreferredBackBufferHeight = screenHeight;
 			_graphics.ApplyChanges();
 
-            Shared.displayPosShift = screenWidth > screenHeight ?
-                new Vector2((screenWidth - screenHeight) / 2, 0) : 
-                new Vector2(0, (screenHeight - screenWidth) / 2);
+			Shared.displayPosShift = screenWidth > screenHeight ?
+				new Vector2((screenWidth - screenHeight) / 2, 0) :
+				new Vector2(0, (screenHeight - screenWidth) / 2);
 
-            Shared.gameDisplaySize = screenWidth > screenHeight ?
+			Shared.gameDisplaySize = screenWidth > screenHeight ?
 				new Vector2(screenHeight, screenHeight) :
 				new Vector2(screenWidth, screenWidth);
 
 			Debug.WriteLine($"{screenWidth} {screenHeight}");
 
 			Shared.stage = new Vector2(_graphics.PreferredBackBufferWidth,
-                _graphics.PreferredBackBufferHeight);
+				_graphics.PreferredBackBufferHeight);
 
 			_spriteBatch = new SpriteBatch(GraphicsDevice);
 			Shared.sb = _spriteBatch;
@@ -72,54 +73,60 @@ namespace TheForgottenKnight
 			Shared.hilightFont = this.Content.Load<SpriteFont>("fonts/HilightFont");
 			Shared.labelFont = this.Content.Load<SpriteFont>("fonts/LabelFont");
 			Shared.smallFont = this.Content.Load<SpriteFont>("fonts/SmallFont");
-            Shared.titleFont = this.Content.Load<SpriteFont>("fonts/TitleFont");
-            Shared.menuBgImage = this.Content.Load<Texture2D>("images/start-menu-bgImage/bgImage");
-            
+			Shared.titleFont = this.Content.Load<SpriteFont>("fonts/TitleFont");
+			Shared.menuBgImage = this.Content.Load<Texture2D>("images/start-menu-bgImage/bgImage");
+			Shared.menuSong = this.Content.Load<Song>("sfx/songs/menu_song");
+			Shared.highscoreSong = this.Content.Load<Song>("sfx/songs/highscore_song");
+			Shared.helpSong = this.Content.Load<Song>("sfx/songs/help_song");
+			Shared.gameSong = this.Content.Load<Song>("sfx/songs/game_song");
+
+			MediaPlayer.IsRepeating = true;
+			MediaPlayer.Volume = 0.2f;
 
 			base.Initialize();
-        }
+		}
 
-        protected override void LoadContent()
-        {
-            //Menu sfx
-            menuSelectSfx = this.Content.Load<SoundEffect>("sfx/start-menu-sfx/menuSelect");
+		protected override void LoadContent()
+		{
+			//Menu sfx
+			menuSelectSfx = this.Content.Load<SoundEffect>("sfx/start-menu-sfx/menuSelect");
 
-            // TODO: use this.Content to load your game content here
-            player = new Player(this);
+			// TODO: use this.Content to load your game content here
+			player = new Player(this);
 
 
 			startScene = new StartScene(this);
-            this.Components.Add(startScene);
+			this.Components.Add(startScene);
 
-            helpScene = new HelpScene(this);
-            this.Components.Add(helpScene);
+			helpScene = new HelpScene(this);
+			this.Components.Add(helpScene);
 
-            actionScene = new ActionScene(this, player);
-            this.Components.Add(actionScene);
+			actionScene = new ActionScene(this, player);
+			this.Components.Add(actionScene);
 
-            endScene = new EndScene(this, player);
-            this.Components.Add(endScene);
+			endScene = new EndScene(this, player);
+			this.Components.Add(endScene);
 
-            highScoreScene = new HighScoreScene(this);
-            this.Components.Add(highScoreScene);
+			highScoreScene = new HighScoreScene(this);
+			this.Components.Add(highScoreScene);
 
-            // Show startScene at the beginning
-            startScene.Show();
-            CurrentScene = startScene;
-        }
+			// Show startScene at the beginning
+			startScene.Show();
+			CurrentScene = startScene;
+		}
 
-        private void HideAllScenes()
-        {
-            foreach (GameComponent item in this.Components)
-            {
-                if (item is GameScene)
-                {
-                    GameScene gs = (GameScene)item;
+		private void HideAllScenes()
+		{
+			foreach (GameComponent item in this.Components)
+			{
+				if (item is GameScene)
+				{
+					GameScene gs = (GameScene)item;
 
-                    gs.Hide();
-                }
-            }
-        }
+					gs.Hide();
+				}
+			}
+		}
 
 		private void WaitTime(float amountoftime)
 		{
@@ -127,8 +134,8 @@ namespace TheForgottenKnight
 			trigger = true;
 		}
 
-        public void ResetGame()
-        {
+		public void ResetGame()
+		{
 			this.Components.Remove(player);
 			this.Components.Remove(actionScene);
 			this.Components.Remove(endScene);
@@ -141,86 +148,107 @@ namespace TheForgottenKnight
 			this.Components.Add(actionScene);
 			this.Components.Add(endScene);
 
-            HideAllScenes(); 
-            PreviousScene = CurrentScene;
+			HideAllScenes();
+			PreviousScene = CurrentScene;
 			startScene.Show();
+
 
 		}
 
 		protected override void Update(GameTime gameTime)
-        {
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            //    Exit();
+		{
+			//if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+			//    Exit();
 
-            // TODO: Add your update logic here
-            KeyboardState ks = Keyboard.GetState();
-            int selectedIndex = 0;
+			// TODO: Add your update logic here
+			KeyboardState ks = Keyboard.GetState();
+			int selectedIndex = 0;
 
-            if (startScene.Enabled)
-            {
-                selectedIndex = startScene.Menu.SelectedIndex;
-                if (selectedIndex == 0 && ks.IsKeyDown(Keys.Enter))
-                {
-                    menuSelectSfx.Play();
-                    startScene.Hide();
-                    PreviousScene = CurrentScene;
-                    actionScene.Show();
-                }
-                else if (selectedIndex == 1 && ks.IsKeyDown(Keys.Enter))
-                {
-					menuSelectSfx.Play();
-					startScene.Hide();
-                    PreviousScene = CurrentScene;
-                    helpScene.Show();
-                }
-                else if (selectedIndex == 2 && ks.IsKeyDown(Keys.Enter))
-                {
-					menuSelectSfx.Play();
-					startScene.Hide();
-                    PreviousScene = CurrentScene;
-                    highScoreScene.Show();
-                }
-                else if (selectedIndex == 4 && ks.IsKeyDown(Keys.Enter))
-                {
-                    Exit();
-                }
-            }
-            else
-            {
-                if (ks.IsKeyDown(Keys.Escape) && CurrentScene != endScene)
-                {
-                    HideAllScenes();
-                    PreviousScene = CurrentScene;
-                    startScene.Show();
-                }
 
-                if (actionScene.Enabled && actionScene.GameOver)
+
+			if (startScene.Enabled)
+			{
+				selectedIndex = startScene.Menu.SelectedIndex;
+
+				if (!isPlayingSong)
 				{
-                    if (!trigger)
-                    {
-                        WaitTime(1);
-                    }
+					isPlayingSong = true;
+					MediaPlayer.Play(Shared.menuSong);
+			
+				}
 
-					if (delay > 0) delay -= 1f/1000f * (float)gameTime.ElapsedGameTime.Milliseconds;
+				if (selectedIndex == 0 && ks.IsKeyDown(Keys.Enter))
+				{
+					menuSelectSfx.Play();
+					startScene.Hide();
+					PreviousScene = CurrentScene;
+					actionScene.Show();
+					MediaPlayer.Play(Shared.gameSong);
+				}
+				else if (selectedIndex == 1 && ks.IsKeyDown(Keys.Enter))
+				{
+					menuSelectSfx.Play();
+					startScene.Hide();
+					PreviousScene = CurrentScene;
+					helpScene.Show();
+
+				}
+				else if (selectedIndex == 2 && ks.IsKeyDown(Keys.Enter))
+				{
+					menuSelectSfx.Play();
+					startScene.Hide();
+					PreviousScene = CurrentScene;
+					highScoreScene.Show();
+				
+				}
+				else if (selectedIndex == 4 && ks.IsKeyDown(Keys.Enter))
+				{
+					Exit();
+				}
+			}
+			else
+			{
+				if (ks.IsKeyDown(Keys.Escape) && CurrentScene != endScene)
+				{
+					HideAllScenes();
+					PreviousScene = CurrentScene;
+					startScene.Show();
+					MediaPlayer.Stop();
+					isPlayingSong = false;
+				}
+
+				if (actionScene.Enabled && actionScene.GameOver)
+				{
+					
+					if (!trigger)
+					{
+						MediaPlayer.Play(Shared.highscoreSong);
+						WaitTime(1);
+
+					}
+
+					if (delay > 0) delay -= 1f / 1000f * (float)gameTime.ElapsedGameTime.Milliseconds;
 					if (delay <= 0 && trigger)
 					{
-                        actionScene.Hide();
+
+						actionScene.Hide();
 						PreviousScene = CurrentScene;
 						endScene.Show();
 						trigger = false;
+						isPlayingSong = false;
 					}
 				}
-            }
+			}
 
-            base.Update(gameTime);
-        }
+			base.Update(gameTime);
+		}
 
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.Black);
+		protected override void Draw(GameTime gameTime)
+		{
+			GraphicsDevice.Clear(Color.Black);
 
 			base.Draw(gameTime);
-        }
+		}
 
 	}
 }

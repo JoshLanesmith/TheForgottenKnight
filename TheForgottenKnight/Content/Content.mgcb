@@ -156,6 +156,30 @@
 /processorParam:TextureFormat=Color
 /build:maps/tilesets/right_arched_door_tileset.png
 
+#begin sfx/songs/game_song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sfx/songs/game_song.mp3
+
+#begin sfx/songs/help_song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sfx/songs/help_song.mp3
+
+#begin sfx/songs/highscore_song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sfx/songs/highscore_song.mp3
+
+#begin sfx/songs/menu_song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sfx/songs/menu_song.mp3
+
 #begin sfx/start-menu-sfx/menuHover.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

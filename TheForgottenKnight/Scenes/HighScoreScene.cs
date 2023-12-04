@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,11 @@ namespace TheForgottenKnight.Scenes
 
 		public HighScoreScene(Game game) : base(game)
 		{
+			
 			Vector2 tablePosition = new Vector2(100, 300);
 			highScoreManager = new HighScoreManager(game, tablePosition);
 			Components.Add(highScoreManager);
+		
 		}
 	}
 }

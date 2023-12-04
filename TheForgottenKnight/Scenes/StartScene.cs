@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +13,17 @@ namespace TheForgottenKnight.Scenes
     public class StartScene : GameScene
     {
         private MenuComponent menu;
+       
 
         public StartScene(Game game) : base(game)
         {
+         
             string[] menuItems = { "Start Game", "Help", "High Score", "Credit", "Quit" };
 
             Menu = new MenuComponent(game, menuItems);
+           
             Components.Add(Menu);
-        }
+		}
 
         public MenuComponent Menu { get => menu; set => menu = value; }
     }
