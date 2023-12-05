@@ -9,8 +9,15 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Title>The Forgotten Knight</Title>
+    <Authors>Josh Lanesmith, Miles Purvis</Authors>
+    <Description>A 2D dungeon crawler timetrial puzzle game</Description>
+    <PackageIcon></PackageIcon>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
