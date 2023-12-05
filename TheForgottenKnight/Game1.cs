@@ -75,6 +75,7 @@ namespace TheForgottenKnight
 			Shared.smallFont = this.Content.Load<SpriteFont>("fonts/SmallFont");
 			Shared.titleFont = this.Content.Load<SpriteFont>("fonts/TitleFont");
 			Shared.menuBgImage = this.Content.Load<Texture2D>("images/start-menu-bgImage/bgImage");
+			Shared.highscoreBgImage = this.Content.Load<Texture2D>("images/highscoreBgImg");
 			Shared.gameWonBgImage = this.Content.Load<Texture2D>("images/gameWonBgImg");
 			Shared.scrollPnlImage = this.Content.Load<Texture2D>("images/ScrollPnlImg");
 			Shared.scrollPnlImageSmall = this.Content.Load<Texture2D>("images/ScrollPnlImgSmall");

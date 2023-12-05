@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,20 @@ namespace TheForgottenKnight.Scenes
 		public HighScoreScene(Game game) : base(game)
 		{
 			
-			Vector2 tablePosition = new Vector2(100, 300);
+			Vector2 tablePosition = new Vector2(Shared.gameDisplaySize.X / 2 - Shared.scrollPnlImage.Width / 2, Shared.gameDisplaySize.Y / 2 - Shared.scrollPnlImage.Height / 2);
 			highScoreManager = new HighScoreManager(game, tablePosition);
 			Components.Add(highScoreManager);
 		
 		}
-	}
+
+        public override void Draw(GameTime gameTime)
+        {
+			Shared.sb.Begin();
+            Shared.sb.Draw(Shared.highscoreBgImage, Shared.displayPosShift, new Rectangle(0, 0, Shared.highscoreBgImage.Width, Shared.highscoreBgImage.Height),
+                Color.White, 0.0f, Vector2.Zero, Shared.gameDisplaySize.X / Shared.highscoreBgImage.Width, SpriteEffects.None, 0);
+
+            Shared.sb.End();
+            base.Draw(gameTime);
+        }
+    }
 }

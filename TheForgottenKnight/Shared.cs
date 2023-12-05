@@ -30,6 +30,7 @@ namespace TheForgottenKnight
 
         //Images
         public static Texture2D menuBgImage;
+        public static Texture2D highscoreBgImage;
         public static Texture2D gameWonBgImage;
         public static Texture2D scrollPnlImage;
         public static Texture2D scrollPnlImageSmall;
