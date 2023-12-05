@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,8 +23,9 @@ namespace TheForgottenKnight
 		private float column1X;
 		private float column2X;
 		private float column3X;
-		private Color newScoreColor = Color.Yellow;
-		private Color regularColor = Color.White;
+		private float topMargin = 30;
+		private Color newScoreColor = Color.Brown;
+		private Color regularColor = Color.Black;
 
 		/// <summary>
 		/// Creates a High Score Manager to load and display the current high scores
@@ -36,10 +38,10 @@ namespace TheForgottenKnight
 			HighScores = LoadHighScores();
 			SortHighScores();
 			this.tablePosition = tablePosition + Shared.displayPosShift;
-			column1X = 0;
-			column2X = column1X + 300;
-			column3X = column2X + 250;
-		}
+            column1X = 50;
+            column2X = column1X + 230;
+            column3X = column2X + 125;
+        }
 
 		/// <summary>
 		/// Creates a High Score Manager with a newScore paramater to check and update the high scores after a game has ended
@@ -54,10 +56,10 @@ namespace TheForgottenKnight
 			SortHighScores();
 			this.newScore = newScore;
 			this.tablePosition = tablePosition + Shared.displayPosShift;
-			column1X = 0;
-			column2X = column1X + 300;
-			column3X = column2X + 250;
-		}
+            column1X = 50;
+            column2X = column1X + 230;
+            column3X = column2X + 125;
+        }
 
 		public List<Score> HighScores { get => highScores; set => highScores = value; }
 
@@ -168,13 +170,17 @@ namespace TheForgottenKnight
 		{
 			Shared.sb.Begin();
 
+			//Shared.sb.Draw(Shared.scrollPnlImage, tablePosition, new Rectangle(0, 0, Shared.scrollPnlImage.Width, Shared.scrollPnlImage.Height),
+				//Color.White, 0.0f, Vector2.Zero, 1, SpriteEffects.None, 0);
+			Shared.sb.Draw(Shared.scrollPnlImage, tablePosition, Color.White);
+
 			// Table Title
-			Shared.sb.DrawString(Shared.smallFont, "High Scores", tablePosition, regularColor);
+			Shared.sb.DrawString(Shared.smallFont, "High Scores", tablePosition + new Vector2(column1X, topMargin), regularColor);
 
 			// Table header row
-			Shared.sb.DrawString(Shared.smallFont, "Name", tablePosition + new Vector2(column1X, Shared.smallFont.LineSpacing), regularColor);
-			Shared.sb.DrawString(Shared.smallFont, "Number of Levels", tablePosition + new Vector2(column2X, Shared.smallFont.LineSpacing), regularColor);
-			Shared.sb.DrawString(Shared.smallFont, "Time Spent", tablePosition + new Vector2(column3X, Shared.smallFont.LineSpacing), regularColor);
+			Shared.sb.DrawString(Shared.smallFont, "Name", tablePosition + new Vector2(column1X, topMargin + Shared.smallFont.LineSpacing), regularColor);
+			Shared.sb.DrawString(Shared.smallFont, "Levels", tablePosition + new Vector2(column2X, topMargin + Shared.smallFont.LineSpacing), regularColor);
+			Shared.sb.DrawString(Shared.smallFont, "Time Spent", tablePosition + new Vector2(column3X, topMargin + Shared.smallFont.LineSpacing), regularColor);
 
 			// Table body rows
 			for (int i = 0; i < Shared.numberOfHighScoresStored; i++)
@@ -198,23 +204,23 @@ namespace TheForgottenKnight
 					// If the new Score player name is null or empty then prompt the player to 'Enter Name'
 					if (string.IsNullOrEmpty(newScore.PlayerName))
 					{
-						Shared.sb.DrawString(Shared.smallFont, $"{i + 1}. Enter Name", tablePosition + new Vector2(column1X, Shared.smallFont.LineSpacing * (2 + i)), newScoreColor);
+						Shared.sb.DrawString(Shared.smallFont, $"{i + 1}. Enter Name", tablePosition + new Vector2(column1X, topMargin + Shared.smallFont.LineSpacing * (2 + i)), newScoreColor);
 					}
 					else
 					{
 						// If the user has entered a name then diplay it
-						Shared.sb.DrawString(Shared.smallFont, $"{i + 1}. {HighScores[i].PlayerName}", tablePosition + new Vector2(column1X, Shared.smallFont.LineSpacing * (2 + i)), newScoreColor);
+						Shared.sb.DrawString(Shared.smallFont, $"{i + 1}. {HighScores[i].PlayerName}", tablePosition + new Vector2(column1X, topMargin + Shared.smallFont.LineSpacing * (2 + i)), newScoreColor);
 					}
-					Shared.sb.DrawString(Shared.smallFont, $"{levels}", tablePosition + new Vector2(column2X, Shared.smallFont.LineSpacing * (2 + i)), newScoreColor);
-					Shared.sb.DrawString(Shared.smallFont, $"{time}", tablePosition + new Vector2(column3X, Shared.smallFont.LineSpacing * (2 + i)), newScoreColor);
+					Shared.sb.DrawString(Shared.smallFont, $"{levels}", tablePosition + new Vector2(column2X, topMargin + Shared.smallFont.LineSpacing * (2 + i)), newScoreColor);
+					Shared.sb.DrawString(Shared.smallFont, $"{time}", tablePosition + new Vector2(column3X, topMargin + Shared.smallFont.LineSpacing * (2 + i)), newScoreColor);
 
 				}
 				else
 				{
 					// Draw all rows that are not the new Score with the regular text color
-					Shared.sb.DrawString(Shared.smallFont, $"{i + 1}. {name}", tablePosition + new Vector2(column1X, Shared.smallFont.LineSpacing * (2 + i)), regularColor);
-					Shared.sb.DrawString(Shared.smallFont, $"{levels}", tablePosition + new Vector2(column2X, Shared.smallFont.LineSpacing * (2 + i)), regularColor);
-					Shared.sb.DrawString(Shared.smallFont, $"{time}", tablePosition + new Vector2(column3X, Shared.smallFont.LineSpacing * (2 + i)), regularColor);
+					Shared.sb.DrawString(Shared.smallFont, $"{i + 1}. {name}", tablePosition + new Vector2(column1X, topMargin + Shared.smallFont.LineSpacing * (2 + i)), regularColor);
+					Shared.sb.DrawString(Shared.smallFont, $"{levels}", tablePosition + new Vector2(column2X, topMargin + Shared.smallFont.LineSpacing * (2 + i)), regularColor);
+					Shared.sb.DrawString(Shared.smallFont, $"{time}", tablePosition + new Vector2(column3X, topMargin + Shared.smallFont.LineSpacing * (2 + i)), regularColor);
 				}
 			}
 			Shared.sb.End();

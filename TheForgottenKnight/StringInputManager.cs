@@ -13,7 +13,7 @@ namespace TheForgottenKnight
 	public class StringInputManager : GameComponent
 	{
 		private string inputText = string.Empty;
-
+		private int maxStringLength = 9;
 		private Keys[] lastPressedKeys = new Keys[5];
 
 		public string InputText { get => inputText; set => inputText = value; }
@@ -65,7 +65,7 @@ namespace TheForgottenKnight
 			{
 				inputText = inputText.Remove(inputText.Length - 1);
 			}
-			else if(Regex.IsMatch(key.ToString(), @"^[0-9A-Z]$") && inputText.Length < 12)
+			else if(Regex.IsMatch(key.ToString(), @"^[0-9A-Z]$") && inputText.Length < maxStringLength)
 			{
 				inputText += key.ToString(); 
 			}

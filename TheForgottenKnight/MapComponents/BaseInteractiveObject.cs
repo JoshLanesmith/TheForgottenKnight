@@ -72,7 +72,7 @@ namespace TheForgottenKnight.MapComponents
 		/// <returns>Return a Rectangle as the current bounds of the object</returns>
 		public Rectangle GetBounds()
 		{
-			return new Rectangle((int)position.X, (int)position.Y, width, height);
+			return new Rectangle((int)position.X, (int)position.Y, width - 1, height - 1);
 		}
 
 		public virtual void ResetPosition()

@@ -61,7 +61,7 @@ namespace TheForgottenKnight
 				new Vector2(screenHeight, screenHeight) :
 				new Vector2(screenWidth, screenWidth);
 
-			Debug.WriteLine($"{screenWidth} {screenHeight}");
+			//Debug.WriteLine($"{screenWidth} {screenHeight}");
 
 			Shared.stage = new Vector2(_graphics.PreferredBackBufferWidth,
 				_graphics.PreferredBackBufferHeight);
@@ -75,6 +75,9 @@ namespace TheForgottenKnight
 			Shared.smallFont = this.Content.Load<SpriteFont>("fonts/SmallFont");
 			Shared.titleFont = this.Content.Load<SpriteFont>("fonts/TitleFont");
 			Shared.menuBgImage = this.Content.Load<Texture2D>("images/start-menu-bgImage/bgImage");
+			Shared.gameWonBgImage = this.Content.Load<Texture2D>("images/gameWonBgImg");
+			Shared.scrollPnlImage = this.Content.Load<Texture2D>("images/ScrollPnlImg");
+			Shared.scrollPnlImageSmall = this.Content.Load<Texture2D>("images/ScrollPnlImgSmall");
 			Shared.menuSong = this.Content.Load<Song>("sfx/songs/menu_song");
 			Shared.highscoreSong = this.Content.Load<Song>("sfx/songs/highscore_song");
 			Shared.helpSong = this.Content.Load<Song>("sfx/songs/help_song");
