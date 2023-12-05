@@ -84,7 +84,7 @@ namespace TheForgottenKnight
 			Shared.gameSong = this.Content.Load<Song>("sfx/songs/game_song");
 
 			MediaPlayer.IsRepeating = true;
-			MediaPlayer.Volume = 0.2f;
+			MediaPlayer.Volume = 0.1f;
 
 			base.Initialize();
 		}

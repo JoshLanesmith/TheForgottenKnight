@@ -48,6 +48,10 @@ namespace TheForgottenKnight.MapComponents
 		private float elapsedTime = 0f;
 		private float interval = 0.2f; // 1 second interval
 		private Random random;
+        private SoundEffect boxPush;
+        private SoundEffect doorOpen;
+        private SoundEffect pickUpItem;
+        
 
 
 		/// <summary>
@@ -104,6 +108,13 @@ namespace TheForgottenKnight.MapComponents
 
 			soundEffects = new SoundEffect[] { walk1, walk2, walk3 };
 
+            //PushingBox
+            boxPush = game.Content.Load<SoundEffect>("sfx/object-sfx/crate_push_1");
+            doorOpen = game.Content.Load<SoundEffect>("sfx/object-sfx/door_open");
+
+            //Pick Up Item
+            pickUpItem = game.Content.Load<SoundEffect>("sfx/object-sfx/pickup_key");
+
 			#endregion
 
 		}
@@ -127,7 +138,7 @@ namespace TheForgottenKnight.MapComponents
                 {
                     position.X = initPos.X;
                 }
-                if (IsPushing(out PushableObject pushedItem))
+                if (IsPushing(out PushableObject pushedItem, gameTime))
                 {
                     pushedItem.PushObject(moveSpeed, 0, out bool hitObject);
 
@@ -149,7 +160,7 @@ namespace TheForgottenKnight.MapComponents
                 {
                     position.X = initPos.X;
                 }
-                if (IsPushing(out PushableObject pushedItem))
+                if (IsPushing(out PushableObject pushedItem, gameTime))
                 {
                     pushedItem.PushObject(-moveSpeed, 0, out bool hitObject);
 
@@ -171,7 +182,7 @@ namespace TheForgottenKnight.MapComponents
                 {
                     position.Y = initPos.Y;
                 }
-                if (IsPushing(out PushableObject pushedItem))
+                if (IsPushing(out PushableObject pushedItem, gameTime))
                 {
                     pushedItem.PushObject(0, -moveSpeed, out bool hitObject);
 
@@ -192,7 +203,7 @@ namespace TheForgottenKnight.MapComponents
                 {
                     position.Y = initPos.Y;
                 }
-                if (IsPushing(out PushableObject pushedItem))
+                if (IsPushing(out PushableObject pushedItem, gameTime))
                 {
                     pushedItem.PushObject(0, moveSpeed, out bool hitObject);
 
@@ -229,8 +240,6 @@ namespace TheForgottenKnight.MapComponents
         public override void Draw(GameTime gameTime)
         {
             Shared.sb.Begin();
-			/*	Shared.sb.Draw(tex, position, new Rectangle(0, 0, tex.Width, tex.Height), Color.White, 0.0f, new Vector2(), scale * map.MapScaleFactor, SpriteEffects.None, 0f);*/
-
 			currentAnimation.Animate(Shared.sb, gameTime, position);
 			Shared.sb.End();
             base.Draw(gameTime);
@@ -249,7 +258,7 @@ namespace TheForgottenKnight.MapComponents
                 {
                     if (rectangle.Intersects(GetBounds()))
                     {
-                        return true;
+                            return true;
                     }
                 }
             }
@@ -263,7 +272,9 @@ namespace TheForgottenKnight.MapComponents
 						foreach (Door lockedDoor in doors)
 						{
 							lockedDoor.UnlockDoor();
+                            
 						}
+						doorOpen.Play();
 					}
 					return true;
 				}
@@ -272,7 +283,7 @@ namespace TheForgottenKnight.MapComponents
 			return false;
         }
 
-        private bool IsPushing(out PushableObject pushedItem)
+        private bool IsPushing(out PushableObject pushedItem, GameTime gameTime)
         {
             pushedItem = null;
 
@@ -280,9 +291,18 @@ namespace TheForgottenKnight.MapComponents
             {
                 if (item.GetBounds().Intersects(GetBounds()))
                 {
-                    pushedItem = item;
-                    return true;
-                }
+					elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    // Check if time has passed
+                    if (elapsedTime >= interval)
+                    {
+                        boxPush.Play();
+					}
+
+					pushedItem = item;
+					return true;
+
+				}
             }
 
             return false;
@@ -297,6 +317,7 @@ namespace TheForgottenKnight.MapComponents
                 if (item.GetBounds().Intersects(GetBounds()))
                 {
                     pickedupItem = item;
+                    pickUpItem.Play();
                     return true;
                 }
 			}
