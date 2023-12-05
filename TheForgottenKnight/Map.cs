@@ -417,9 +417,9 @@ namespace TheForgottenKnight
 		{
 			// Load the texture, define the initial position, create the player object, and add it to the map components
 			// Player			
-			Texture2D[] playerAnimations = new Texture2D[] { Game.Content.Load<Texture2D>("images/player-spritesheet/Idle"), Game.Content.Load<Texture2D>("images/player-spritesheet/Walk") };
-			
+			Texture2D[] playerAnimations = new Texture2D[] { Game.Content.Load<Texture2D>("images/player-spritesheet/Idle1"), Game.Content.Load<Texture2D>("images/player-spritesheet/Walk") };
 
+		
 			Vector2 playerStartPosition = new Vector2();
 			if (map.Layers.Count() == 1 && map.Layers[0].objects.Count() == 1)
 			{

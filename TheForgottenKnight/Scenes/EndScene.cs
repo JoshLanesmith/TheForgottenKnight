@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ namespace TheForgottenKnight.Scenes
 		private Vector2 button1Position;
 		private Vector2 button2Position;
 		private Color regularColor = Color.Black;
+		private SoundEffect saveClick;
+		private SoundEffect cancelClick;
 
 		public EndScene(Game game, Player player) : base(game)
 		{
@@ -35,13 +38,14 @@ namespace TheForgottenKnight.Scenes
 			highScoreManager = new HighScoreManager(game, newScore, tablePosition);
 			Components.Add(highScoreManager);
 
-			Texture2D cancelButtonTex = Game.Content.Load<Texture2D>("images/cancel_red");
+			Texture2D cancelButtonTex = Game.Content.Load<Texture2D>("images/buttons/cancelButton");
+			cancelClick = Game.Content.Load<SoundEffect>("sfx/end-menu-sfx/cancel");
 
 			button1Position = tablePosition + new Vector2(Shared.scrollPnlImage.Width / 2 - cancelButtonTex.Width - 10, Shared.scrollPnlImage.Height + 20);
 			button2Position = tablePosition + new Vector2(Shared.scrollPnlImage.Width / 2 + 10, Shared.scrollPnlImage.Height + 20);
 
 			cancelButton = new ButtonComponent(game, button1Position, cancelButtonTex, () => {
-
+				cancelClick.Play();
 				Game1 g = (Game1)game;
 				g.ResetGame();
 			});
@@ -60,11 +64,12 @@ namespace TheForgottenKnight.Scenes
 
 				if (highScoreManager.NewScoreIsHighScore(newScore))
 				{
-					Texture2D saveButtonTex = Game.Content.Load<Texture2D>("images/save_red");
+					Texture2D saveButtonTex = Game.Content.Load<Texture2D>("images/buttons/saveButton");
+					saveClick = Game.Content.Load<SoundEffect>("sfx/end-menu-sfx/save");
+
 					saveButton = new ButtonComponent(Game, button2Position, saveButtonTex, () => {
-
+						saveClick.Play();
 						highScoreManager.SaveHighScores();
-
 						Game1 g = (Game1)Game;
 						g.ResetGame();
 
