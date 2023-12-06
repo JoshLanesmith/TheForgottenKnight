@@ -19,7 +19,7 @@ namespace TheForgottenKnight
 
         //Fonts
         public static SpriteFont regularFont;
-        public static SpriteFont hilightFont;
+        public static SpriteFont highlightFont;
         public static SpriteFont labelFont;
         public static SpriteFont smallFont;
         public static SpriteFont titleFont;

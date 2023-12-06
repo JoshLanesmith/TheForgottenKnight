@@ -97,6 +97,7 @@ namespace TheForgottenKnight.MapComponents
 
 			//Default Idle
 			currentIdle = playerIdle[0];
+            currentAnimation = currentIdle;
 			#endregion
 
 			#region SFX
