@@ -70,7 +70,7 @@ namespace TheForgottenKnight
 			Shared.sb = _spriteBatch;
 
 			Shared.regularFont = this.Content.Load<SpriteFont>("fonts/RegularFont");
-			Shared.hilightFont = this.Content.Load<SpriteFont>("fonts/HilightFont");
+			Shared.highlightFont = this.Content.Load<SpriteFont>("fonts/HilightFont");
 			Shared.labelFont = this.Content.Load<SpriteFont>("fonts/LabelFont");
 			Shared.smallFont = this.Content.Load<SpriteFont>("fonts/SmallFont");
 			Shared.titleFont = this.Content.Load<SpriteFont>("fonts/TitleFont");
@@ -159,6 +159,36 @@ namespace TheForgottenKnight
 
 		}
 
+		public void GoToActionScene()
+		{
+            menuSelectSfx.Play();
+            startScene.Hide();
+            PreviousScene = CurrentScene;
+            actionScene.Show();
+            MediaPlayer.Play(Shared.gameSong);
+        }
+
+		public void GoToHelpScene()
+		{
+            menuSelectSfx.Play();
+            startScene.Hide();
+            PreviousScene = CurrentScene;
+            helpScene.Show();
+        }
+
+		public void GoToHighscoreScene()
+		{
+            menuSelectSfx.Play();
+            startScene.Hide();
+            PreviousScene = CurrentScene;
+            highScoreScene.Show();
+        }
+
+		public void ExitGame()
+		{
+			Exit();
+		}
+
 		protected override void Update(GameTime gameTime)
 		{
 			//if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -183,31 +213,35 @@ namespace TheForgottenKnight
 
 				if (selectedIndex == 0 && ks.IsKeyDown(Keys.Enter))
 				{
-					menuSelectSfx.Play();
-					startScene.Hide();
-					PreviousScene = CurrentScene;
-					actionScene.Show();
-					MediaPlayer.Play(Shared.gameSong);
+					GoToActionScene();
+					//menuSelectSfx.Play();
+					//startScene.Hide();
+					//PreviousScene = CurrentScene;
+					//actionScene.Show();
+					//MediaPlayer.Play(Shared.gameSong);
 				}
 				else if (selectedIndex == 1 && ks.IsKeyDown(Keys.Enter))
 				{
-					menuSelectSfx.Play();
-					startScene.Hide();
-					PreviousScene = CurrentScene;
-					helpScene.Show();
+					GoToHelpScene();
+					//menuSelectSfx.Play();
+					//startScene.Hide();
+					//PreviousScene = CurrentScene;
+					//helpScene.Show();
 
 				}
 				else if (selectedIndex == 2 && ks.IsKeyDown(Keys.Enter))
 				{
-					menuSelectSfx.Play();
-					startScene.Hide();
-					PreviousScene = CurrentScene;
-					highScoreScene.Show();
+					GoToHighscoreScene();
+
+					//menuSelectSfx.Play();
+					//startScene.Hide();
+					//PreviousScene = CurrentScene;
+					//highScoreScene.Show();
 				
 				}
 				else if (selectedIndex == 4 && ks.IsKeyDown(Keys.Enter))
 				{
-					Exit();
+					ExitGame();
 				}
 			}
 			else
