@@ -79,7 +79,7 @@ namespace TheForgottenKnight
             Vector2 tempPos = new Vector2(startX, startY);
             titlePos = new Vector2((screenWidth - titleWidth) / 2, startY  - titleOffsetY);
 
-			backPanel = new DrawableRectangle(game, titleWidth, titleOffsetY + totalMenuHeight, titlePos, new Color(120, 120, 120), 0);
+			backPanel = new DrawableRectangle(game, titleWidth, titleOffsetY + totalMenuHeight, titlePos, new Color(120, 120, 120), 150);
 			scene.Components.Add(backPanel);
 
             for (int i = 0; i < this.menuStrings.Count(); i++)
