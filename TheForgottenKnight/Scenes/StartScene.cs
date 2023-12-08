@@ -7,12 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TheForgottenKnight.Scenes
 {
     public class StartScene : GameScene
     {
         private MenuComponent menu;
+        private CustomCursor cursor;
 
         public StartScene(Game game) : base(game)
         {
@@ -30,9 +32,11 @@ namespace TheForgottenKnight.Scenes
             };
 
             Menu = new MenuComponent(game, this, menuItems, menuActions);
-           
             Components.Add(Menu);
-		}
+
+            cursor = new CustomCursor(game);
+            Components.Add(cursor);
+        }
 
         public MenuComponent Menu { get => menu; set => menu = value; }
 

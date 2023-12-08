@@ -157,6 +157,7 @@ namespace TheForgottenKnight
 
 		public override void Draw(GameTime gameTime)
 		{
+			base.Draw(gameTime);
 
 			Shared.sb.Begin();
 
@@ -164,7 +165,6 @@ namespace TheForgottenKnight
 
 			Shared.sb.End();
 
-			base.Draw(gameTime);
 		}
 	}
 }

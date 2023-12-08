@@ -44,7 +44,8 @@ namespace TheForgottenKnight
 
 		protected override void Initialize()
 		{
-			int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            this.IsMouseVisible = false;
+            int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
 			int screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
 			// TODO: Add your initialization logic here

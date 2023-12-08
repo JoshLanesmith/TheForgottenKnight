@@ -26,8 +26,9 @@ namespace TheForgottenKnight.Scenes
 		private Color regularColor = Color.Black;
 		private SoundEffect saveClick;
 		private SoundEffect cancelClick;
+        private CustomCursor cursor;
 
-		public EndScene(Game game, Player player) : base(game)
+        public EndScene(Game game, Player player) : base(game)
 		{
 			this.player = player;
 			newScore = new Score();
@@ -50,7 +51,10 @@ namespace TheForgottenKnight.Scenes
 				g.ResetGame();
 			});
 			Components.Add(cancelButton);
-		}
+
+            cursor = new CustomCursor(game);
+            Components.Add(cursor);
+        }
 
 		public override void Update(GameTime gameTime)
 		{
@@ -74,7 +78,8 @@ namespace TheForgottenKnight.Scenes
 						g.ResetGame();
 
 					});
-					Components.Add(saveButton);
+					//Components.Add(saveButton);
+					Components.Insert(Components.Count() - 2, saveButton);
 				}
 			}
 
