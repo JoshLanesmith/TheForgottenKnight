@@ -49,9 +49,9 @@ namespace TheForgottenKnight
 			Shared.sb.Draw(tex, pos1, srcRec, Color.White);
 			Shared.sb.Draw(tex, pos2, srcRec, Color.White);
 			Shared.sb.Draw(Shared.scrollPnlImageSmall, imagePosition, Color.White);
-			Shared.sb.DrawString(Shared.hilightFont, "Created By: ", titlePosition, Color.Black);
-			Shared.sb.DrawString(Shared.hilightFont, "Miles Purvis", milesPosition, Color.Black);
-			Shared.sb.DrawString(Shared.hilightFont, "Josh Lanesmith", joshPosition, Color.Black);
+			Shared.sb.DrawString(Shared.highlightFont, "Created By: ", titlePosition, Color.Black);
+			Shared.sb.DrawString(Shared.highlightFont, "Miles Purvis", milesPosition, Color.Black);
+			Shared.sb.DrawString(Shared.highlightFont, "Josh Lanesmith", joshPosition, Color.Black);
 			
 
 			Shared.sb.End();

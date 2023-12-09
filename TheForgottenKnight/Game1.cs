@@ -188,6 +188,13 @@ namespace TheForgottenKnight
             PreviousScene = CurrentScene;
             highScoreScene.Show();
         }
+		public void GoToCreditScene()
+		{
+			menuSelectSfx.Play();
+			startScene.Hide();
+			PreviousScene = CurrentScene;
+			creditScene.Show();
+		}
 
 		public void ExitGame()
 		{
@@ -246,10 +253,7 @@ namespace TheForgottenKnight
 				}
 				else if (selectedIndex == 3 && ks.IsKeyDown(Keys.Enter))
 				{
-					menuSelectSfx.Play();
-					startScene.Hide();
-					PreviousScene = CurrentScene;
-					creditScene.Show();
+					GoToCreditScene();
 				}
 				else if (selectedIndex == 4 && ks.IsKeyDown(Keys.Enter))
 				{

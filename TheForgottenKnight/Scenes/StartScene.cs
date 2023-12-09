@@ -27,7 +27,7 @@ namespace TheForgottenKnight.Scenes
                 () => { g.GoToActionScene(); },
                 () => { g.GoToHelpScene(); },
                 () => { g.GoToHighscoreScene(); },
-                () => { },
+                () => { g.GoToCreditScene(); },
                 () => { g.ExitGame(); }
             };
 
