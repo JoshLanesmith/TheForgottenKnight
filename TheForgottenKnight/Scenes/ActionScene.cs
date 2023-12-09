@@ -1,4 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* ActionScene.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created        
+ */
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using System;
@@ -13,6 +18,9 @@ using TiledCS;
 
 namespace TheForgottenKnight.Scenes
 {
+	/// <summary>
+	/// Represents the action scene in the game, managing level progression, player stats, and game over conditions.
+	/// </summary>
 	public class ActionScene : GameScene
 	{
 		private Map currentLevelMap;
@@ -24,7 +32,11 @@ namespace TheForgottenKnight.Scenes
 		private float delay = 0;
 		private bool timerTrigger = false;
 
-
+		/// <summary>
+		/// Initializes a new instance of the ActionScene class.
+		/// </summary>
+		/// <param name="game">The Game instance.</param>
+		/// <param name="player">The player object associated with the action scene.</param>
 		public ActionScene(Game game, Player player) : base(game)
 		{
 			this.player = player;
@@ -37,8 +49,15 @@ namespace TheForgottenKnight.Scenes
 			Components.Add(currentLevelMap);
 		}
 
+		/// <summary>
+		/// Gets or sets a value indicating whether the game is over.
+		/// </summary>
 		public bool GameOver { get => gameOver; set => gameOver = value; }
 
+		/// <summary>
+		/// Updates the action scene, handling level completion, player stats, and game over conditions.
+		/// </summary>
+		/// <param name="gameTime">Snapshot of the game's timing state.</param>
 		public override void Update(GameTime gameTime)
 		{
 			Game1 g = (Game1)Game;
@@ -89,7 +108,10 @@ namespace TheForgottenKnight.Scenes
 			base.Update(gameTime);
 		}
 
-
+		/// <summary>
+		/// Sets the map levels based on the TMX files in the "maps" directory.
+		/// </summary>
+		/// <returns>A dictionary mapping level numbers to TiledMap instances.</returns>
 		private Dictionary<int, TiledMap> SetMapLevels()
 		{
 			string mapsRootDirectory = Game.Content.RootDirectory + "\\maps";
@@ -104,6 +126,10 @@ namespace TheForgottenKnight.Scenes
 			return mapLevels;
 		}
 
+		/// <summary>
+		/// Waits for a specified amount of time before triggering the next level.
+		/// </summary>
+		/// <param name="amountOfTime">The time to wait in seconds.</param>
 		private void WaitTime(float amountoftime)
 		{
 			delay = amountoftime;

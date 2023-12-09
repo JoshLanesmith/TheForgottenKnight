@@ -1,4 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* CreditScene.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Miles Purvis, 2023.12.08: Created        
+ */
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -8,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace TheForgottenKnight.Scenes
 {
+	/// <summary>
+	/// Represents the credit scene in the game, displaying credits using a parallax scrolling background.
+	/// </summary>
 	public class CreditScene : GameScene
 	{
 		private Rectangle srcRec;
@@ -15,7 +23,10 @@ namespace TheForgottenKnight.Scenes
 		private Vector2 pos;
 		private Vector2 speed;
 
-
+		/// <summary>
+		/// Initializes a new instance of the CreditScene class.
+		/// </summary>
+		/// <param name="game">The Game instance.</param>
 		public CreditScene(Game game) : base(game)
 		{
 			tex = Game.Content.Load<Texture2D>("images/dungeon");
@@ -26,23 +37,6 @@ namespace TheForgottenKnight.Scenes
 			Parallax para = new Parallax(Game,tex,srcRec,speed,pos);
 			this.Components.Add(para);
 
-		}
-
-		protected override void LoadContent()
-		{
-			
-			base.LoadContent();
-		}
-
-		public override void Update(GameTime gameTime)
-		{
-			base.Update(gameTime);
-		}
-
-		public override void Draw(GameTime gameTime)
-		{
-		
-			base.Draw(gameTime);
 		}
 	}
 }

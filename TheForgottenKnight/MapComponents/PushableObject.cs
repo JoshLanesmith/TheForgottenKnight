@@ -1,4 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* PushableObject.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created        
+ */
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct2D1.Effects;
@@ -10,15 +15,18 @@ using System.Threading.Tasks;
 
 namespace TheForgottenKnight.MapComponents
 {
-    public class PushableObject : BaseInteractiveObject
-    {
-        private float scale = 1;
+	/// <summary>
+	/// Represents a pushable object in the game.
+	/// </summary>
+	public class PushableObject : BaseInteractiveObject
+	{
+		private float scale = 1;
 
-        private List<CollisionLayer> collisionLayers;
+		private List<CollisionLayer> collisionLayers;
 		private List<PickupObject> pickupObjects;
 		private List<Door> doors;
-     
-       
+
+
 
 		/// <summary>
 		/// Create a pushable object
@@ -36,10 +44,8 @@ namespace TheForgottenKnight.MapComponents
 			: base(game, map, tex, width, height, tilesetRow, tilesetColumn, startingX, startingY)
 		{
 			collisionLayers = map.CollisionLayers;
-            pickupObjects = map.PickupObjects;
-            doors = map.Doors;
-            /*doorOpen = game.Content.Load<SoundEffect>("sfx/object-sfx/door_open");*/
-
+			pickupObjects = map.PickupObjects;
+			doors = map.Doors;
 		}
 
 		/// <summary>
@@ -49,62 +55,62 @@ namespace TheForgottenKnight.MapComponents
 		/// <param name="yMovement">Movement caused on the x access by the push</param>
 		/// <param name="hitObject">Out paramater indicating if the object collided with another object when pushed</param>
 		public void PushObject(float xMovement, float yMovement, out bool hitObject)
-        {
-            hitObject = false;
+		{
+			hitObject = false;
 
-            Vector2 initPos = position;
+			Vector2 initPos = position;
 
-            position.X += xMovement;
-            position.Y += yMovement;
+			position.X += xMovement;
+			position.Y += yMovement;
 
-            if (IsColliding())
-            {
-                position = initPos;
-                hitObject = true;
-               
-            }
-        }
+			if (IsColliding())
+			{
+				position = initPos;
+				hitObject = true;
 
-        /// <summary>
-        /// Check if object is colliding with any other collision objects
-        /// </summary>
-        /// <returns>Return true if it is colliding with another object and false if it is not colliding</returns>
-        private bool IsColliding()
-        {
-            foreach (CollisionLayer layer in collisionLayers)
-            {
-                foreach (Rectangle rectangle in layer.CollisionObjects)
-                {
-                    if (rectangle.Intersects(GetBounds()))
-                    { 
+			}
+		}
+
+		/// <summary>
+		/// Check if object is colliding with any other collision objects
+		/// </summary>
+		/// <returns>Return true if it is colliding with another object and false if it is not colliding</returns>
+		private bool IsColliding()
+		{
+			foreach (CollisionLayer layer in collisionLayers)
+			{
+				foreach (Rectangle rectangle in layer.CollisionObjects)
+				{
+					if (rectangle.Intersects(GetBounds()))
+					{
 						return true;
-                    }
-                }
-            }
-            foreach (PushableObject item in map.PushableObjects)
-            {
-                if (item != this && item.GetBounds().Intersects(GetBounds()))
-                {
-                    return true;
-                }
-            }
-            foreach (PickupObject item in pickupObjects)
-            {
-                if (item.GetBounds().Intersects(GetBounds()))
-                {
-                    return true;
-                }
-            }
-            foreach (Door door in doors)
-            {
-                if (door.GetBounds().Intersects(GetBounds()))
-                {
-                    return true;
-                }
-            }
+					}
+				}
+			}
+			foreach (PushableObject item in map.PushableObjects)
+			{
+				if (item != this && item.GetBounds().Intersects(GetBounds()))
+				{
+					return true;
+				}
+			}
+			foreach (PickupObject item in pickupObjects)
+			{
+				if (item.GetBounds().Intersects(GetBounds()))
+				{
+					return true;
+				}
+			}
+			foreach (Door door in doors)
+			{
+				if (door.GetBounds().Intersects(GetBounds()))
+				{
+					return true;
+				}
+			}
 
 
-            return false;
-        }
-    }
+			return false;
+		}
+	}
 }

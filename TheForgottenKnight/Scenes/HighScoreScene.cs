@@ -1,4 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* HighScoreScene.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.26: Created        
+ */
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using System;
@@ -9,10 +14,16 @@ using System.Threading.Tasks;
 
 namespace TheForgottenKnight.Scenes
 {
+	/// <summary>
+	/// Represents a scene dedicated to displaying high scores.
+	/// </summary>
 	public class HighScoreScene : GameScene
 	{
 		private HighScoreManager highScoreManager;
-
+		/// <summary>
+		/// Initializes a new instance of the HighScoreScene class.
+		/// </summary>
+		/// <param name="game">The Game instance.</param>
 		public HighScoreScene(Game game) : base(game)
 		{
 			
@@ -22,7 +33,11 @@ namespace TheForgottenKnight.Scenes
 		
 		}
 
-        public override void Draw(GameTime gameTime)
+		/// <summary>
+		/// Draws the high score scene, displaying the background and high score manager.
+		/// </summary>
+		/// <param name="gameTime">Snapshot of the game's timing state.</param>
+		public override void Draw(GameTime gameTime)
         {
 			Shared.sb.Begin();
             Shared.sb.Draw(Shared.highscoreBgImage, Shared.displayPosShift, new Rectangle(0, 0, Shared.highscoreBgImage.Width, Shared.highscoreBgImage.Height),
