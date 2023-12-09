@@ -1,4 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* HelpScene.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.27: Created        
+ */
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -10,6 +15,9 @@ using TiledCS;
 
 namespace TheForgottenKnight.Scenes
 {
+	/// <summary>
+	/// Represents a scene dedicated to providing help and instructions to the player.
+	/// </summary>
 	public class HelpScene : GameScene
 	{
 		private HelpMap helpMap;
@@ -19,6 +27,11 @@ namespace TheForgottenKnight.Scenes
 		private float delay = 0;
 		private bool timerTrigger = false;
 
+
+		/// <summary>
+		/// Initializes a new instance of the HelpScene class.
+		/// </summary>
+		/// <param name="game">The Game instance.</param>
 		public HelpScene(Game game) : base(game)
 		{
 			GameOver = false;
@@ -33,8 +46,16 @@ namespace TheForgottenKnight.Scenes
 			Components.Add(helpMap);
 		}
 
+		/// <summary>
+		/// Gets or sets a value indicating whether the help scene is in a game-over state.
+		/// </summary>
 		public bool GameOver { get => gameOver; set => gameOver = value; }
 
+
+		/// <summary>
+		/// Updates the help scene, checking for game-over conditions and handling resets.
+		/// </summary>
+		/// <param name="gameTime">Snapshot of the game's timing state.</param>
 		public override void Update(GameTime gameTime)
 		{
 			Game1 g = (Game1)Game;
@@ -65,6 +86,10 @@ namespace TheForgottenKnight.Scenes
 			base.Update(gameTime);
 		}
 
+		/// <summary>
+		/// Sets a delay time for triggering specific actions in the help scene.
+		/// </summary>
+		/// <param name="amountoftime">The time to wait before triggering the action.</param>
 		private void WaitTime(float amountoftime)
 		{
 			delay = amountoftime;

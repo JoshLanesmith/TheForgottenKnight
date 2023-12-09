@@ -1,8 +1,7 @@
 ﻿/* Animator.cs
  * The Forgotten Knight
  *	Revision History
- *			Miles Purvis, 2023.11.26: Created
- *			
+ *			Miles Purvis, 2023.11.26: Created		
  */
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,7 +14,7 @@ using System.Threading.Tasks;
 namespace TheForgottenKnight
 {
 	/// <summary>
-	/// Handles animation
+	/// Animator class to handle sprite sheet animation.
 	/// </summary>
 	public class Animator
 	{
@@ -29,12 +28,13 @@ namespace TheForgottenKnight
 		private int timeSinceLastFrame = 0;
 
 		/// <summary>
-		/// Animator class to handle sprite sheet animation
+		/// Initializes a new instance of the Animator class.
 		/// </summary>
-		/// <param name="animationSheet">The animation sheet to be animated</param>
-		/// <param name="column">The direction which the animation will parse the document</param>
-		/// <param name="width">each sprits dimension eg.16x16 for width</param>
-		/// <param name="height">each sprits dimension eg.16x16 for Height</param>
+		/// <param name="map">The map associated with the animator.</param>
+		/// <param name="animationSheet">The animation sheet to be animated.</param>
+		/// <param name="column">The direction in which the animation will parse the document.</param>
+		/// <param name="width">The width of each sprite dimension (e.g., 16x16 for width).</param>
+		/// <param name="height">The height of each sprite dimension (e.g., 16x16 for height).</param>
 		public Animator(Map map, Texture2D animationSheet, int column, int width, int height)
 		{
 			this.map = map;

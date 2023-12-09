@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace TheForgottenKnight
 {
+	/// <summary>
+	/// Parallax component handles moveable background 
+	/// </summary>
 	public class Parallax : DrawableGameComponent
 	{
 		private Texture2D tex;
@@ -24,6 +27,15 @@ namespace TheForgottenKnight
 		private Vector2 imagePosition;
 		private Vector2 titlePosition;
 		private Vector2 pos1, pos2;
+
+		/// <summary>
+		/// Initializes a new instance of the Parallax class.
+		/// </summary>
+		/// <param name="game">The Game object associated with this component.</param>
+		/// <param name="tex">The texture used for the parallax effect.</param>
+		/// <param name="srcRec">The source rectangle defining the portion of the texture to draw.</param>
+		/// <param name="speed">The speed at which the background moves.</param>
+		/// <param name="pos">The initial position of the background images.</param>
 		public Parallax(Game game, Texture2D tex, Rectangle srcRec, Vector2 speed, Vector2 pos) : base(game)
 		{
 
@@ -36,13 +48,17 @@ namespace TheForgottenKnight
 			float screenWidth = GraphicsDevice.Viewport.Width;
 			float screenHeight = GraphicsDevice.Viewport.Height;
 
-
 			imagePosition = new Vector2((screenWidth - Shared.scrollPnlImageSmall.Width) / 2, (screenHeight - Shared.scrollPnlImageSmall.Height) / 2);
 			milesPosition = new Vector2(imagePosition.X + 200, imagePosition.Y + 55);
 			joshPosition = new Vector2(imagePosition.X + 200, imagePosition.Y + 80);
 			titlePosition = new Vector2(imagePosition.X + 200, imagePosition.Y + 10);
 		}
 
+		/// <summary>
+		/// Draws the parallax background and additional text.
+		/// </summary>
+		/// <param name="gameTime">Snapshot of the game's timing state.</param>
+		/// /// <summary>
 		public override void Draw(GameTime gameTime)
 		{
 			Shared.sb.Begin();
@@ -52,12 +68,14 @@ namespace TheForgottenKnight
 			Shared.sb.DrawString(Shared.highlightFont, "Created By: ", titlePosition, Color.Black);
 			Shared.sb.DrawString(Shared.highlightFont, "Miles Purvis", milesPosition, Color.Black);
 			Shared.sb.DrawString(Shared.highlightFont, "Josh Lanesmith", joshPosition, Color.Black);
-			
-
 			Shared.sb.End();
 			base.Draw(gameTime);
 		}
 
+		
+		/// Updates the position of the background images based on the speed.
+		/// </summary>
+		/// <param name="gameTime">Snapshot of the game's timing state.</param>
 		public override void Update(GameTime gameTime)
 		{
 			pos1 -= speed;

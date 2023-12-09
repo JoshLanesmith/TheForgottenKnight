@@ -1,4 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* EndScene.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created        
+ */
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -11,6 +16,9 @@ using System.Windows.Forms;
 
 namespace TheForgottenKnight.Scenes
 {
+	/// <summary>
+	/// Represents the end game scene in the game, displaying scores, providing options to save scores, exit the game, or restart.
+	/// </summary>
 	public class EndScene : GameScene
 	{
 		private Player player;
@@ -31,7 +39,15 @@ namespace TheForgottenKnight.Scenes
         private CustomCursor cursor;
 		private float scrollPanelScalingFactor;
 
-        public EndScene(Game game, Player player) : base(game)
+
+		/// <summary>
+		/// Initializes a new instance of the EndGameScene class.
+		/// </summary>
+		/// <param name="game">The Game instance.</param>
+		/// <param name="player">The player object associated with the end game scene.</param>
+		/// <param name="newScore">The new score to be displayed and potentially saved.</param>
+		/// <param name="stringInputManager">The manager for handling string input for the player's name.</param>
+		public EndScene(Game game, Player player) : base(game)
         {
             Game1 g = (Game1)game;
             this.player = player;
@@ -107,6 +123,10 @@ namespace TheForgottenKnight.Scenes
             Components.Add(cursor);
         }
 
+		/// <summary>
+		/// Updates the end game scene, checking for a new high score, enabling/disabling save button, and handling player input.
+		/// </summary>
+		/// <param name="gameTime">Snapshot of the game's timing state.</param>
 		public override void Update(GameTime gameTime)
 		{
 			Game1 g = (Game1)Game;
@@ -128,22 +148,22 @@ namespace TheForgottenKnight.Scenes
 			newScore.PlayerName = stringInputManager.InputText;
 		}
 
+		/// <summary>
+		/// Draws the end game scene, displaying background images, score information, and buttons for various actions.
+		/// </summary>
+		/// <param name="gameTime">Snapshot of the game's timing state.</param>
 		public override void Draw(GameTime gameTime)
 		{
 			Shared.sb.Begin();
 			Shared.sb.Draw(Shared.gameWonBgImage, Shared.displayPosShift, new Rectangle(0, 0, Shared.gameWonBgImage.Width, Shared.gameWonBgImage.Height),
                 Color.White, 0.0f, Vector2.Zero, scrollPanelScalingFactor, SpriteEffects.None, 0);
-
 			Shared.sb.Draw(Shared.scrollPnlImageSmall, topBannerPosition + Shared.displayPosShift, new Rectangle(0, 0, Shared.scrollPnlImageSmall.Width, Shared.scrollPnlImageSmall.Height),
 				Color.White);
-
             Shared.sb.DrawString(Shared.smallFont, $"Your Score", topBannerPosition + Shared.displayPosShift + new Vector2(50, 30), regularColor);
 			Shared.sb.DrawString(Shared.smallFont, $"Levels Completed: {player.LevelsCompleted}",
                 topBannerPosition + new Vector2(50, 30 + Shared.regularFont.LineSpacing) + Shared.displayPosShift, regularColor);
 			Shared.sb.DrawString(Shared.smallFont, $"Time Spent in Completed Levels: {player.TimeSpent:0.##} seconds",
                 topBannerPosition + new Vector2(50, 30 + Shared.regularFont.LineSpacing * 2) + Shared.displayPosShift, regularColor);
-
-
 			Shared.sb.End();
 
 			base.Draw(gameTime);
