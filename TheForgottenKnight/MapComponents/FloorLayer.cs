@@ -1,18 +1,21 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* FloorLayer.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created        
+ */
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TiledCS;
 
 namespace TheForgottenKnight.MapComponents
 {
-	/// <summary>
-	/// Floor layer for the map defining visual of the floor with no collision detection
-	/// </summary>
-	public class FloorLayer : DrawableGameComponent
+    /// <summary>
+    /// Floor layer for the map defining visual of the floor with no collision detection
+    /// </summary>
+    public class FloorLayer : DrawableGameComponent
     {
         protected Map map;
         protected List<Tileset> utilizedTilesets;
@@ -26,17 +29,18 @@ namespace TheForgottenKnight.MapComponents
         protected int tileHeight;
 
 
-		/// <summary>
-		/// Create floor layer for the map
-		/// </summary>
-		/// <param name="game">The game context for the collision layer</param>
-		/// <param name="utilizedTilesets">List of Tilesets used in the map</param>
-		/// <param name="tileLayer">The tiled layer data from the .tmx file</param>
-		/// <param name="mapRows">Number of rows in the map</param>
-		/// <param name="mapColumns">Number of columns in the map</param>
-		/// <param name="tileWidth">Width of each tile</param>
-		/// <param name="tileHeight">Height of each tile</param>
-		public FloorLayer(Game game, Map map, List<Tileset> utilizedTilesets, TiledLayer tileLayer,
+        /// <summary>
+        /// Create floor layer for the map
+        /// </summary>
+        /// <param name="game">The game context for the collision layer</param>
+        /// <param name="map">The map context for the collision layer</param>
+        /// <param name="utilizedTilesets">List of Tilesets used in the map</param>
+        /// <param name="tileLayer">The tiled layer data from the .tmx file</param>
+        /// <param name="mapRows">Number of rows in the map</param>
+        /// <param name="mapColumns">Number of columns in the map</param>
+        /// <param name="tileWidth">Width of each tile</param>
+        /// <param name="tileHeight">Height of each tile</param>
+        public FloorLayer(Game game, Map map, List<Tileset> utilizedTilesets, TiledLayer tileLayer,
 			int mapRows, int mapColumns, int tileWidth, int tileHeight) : base(game)
 		{
 			this.map = map;

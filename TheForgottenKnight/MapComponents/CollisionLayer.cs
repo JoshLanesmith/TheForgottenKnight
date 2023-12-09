@@ -1,10 +1,12 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿/* CollisionLayer.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created        
+ */
+
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TiledCS;
 
 namespace TheForgottenKnight.MapComponents
@@ -20,6 +22,7 @@ namespace TheForgottenKnight.MapComponents
 		/// Create collision layer for the map
 		/// </summary>
 		/// <param name="game">The game context for the collision layer</param>
+        /// <param name="map">The map context for the collision layer</param>
 		/// <param name="utilizedTilesets">List of Tilesets used in the map</param>
 		/// <param name="tileLayer">The tiled layer data from the .tmx file</param>
 		/// <param name="mapRows">Number of rows in the map</param>

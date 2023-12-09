@@ -1,17 +1,20 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* Bag.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created        
+ */
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight.MapComponents
 {
-	/// <summary>
-	/// Bag class to track items that have been pickup by the player
-	/// </summary>
-	public class Bag : DrawableGameComponent
+    /// <summary>
+    /// Bag class to track items that have been pickup by the player
+    /// </summary>
+    public class Bag : DrawableGameComponent
 	{
 		private Map map;
 		private List<PickupObject> bagItems;
@@ -75,6 +78,9 @@ namespace TheForgottenKnight.MapComponents
 			}
 		}
 
+		/// <summary>
+		/// Reset the bag to empty and not showing
+		/// </summary>
 		public void ResetBag()
 		{
 			BagItems.Clear();

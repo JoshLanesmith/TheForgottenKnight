@@ -1,17 +1,18 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* CountDownTimer.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created        
+ */
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight.MapComponents
 {
-	/// <summary>
-	/// Count down timer used to track how long the player spent in a level
-	/// </summary>
-	public class CountDownTimer : DrawableGameComponent
+    /// <summary>
+    /// Count down timer used to track how long the player spent in a level
+    /// </summary>
+    public class CountDownTimer : DrawableGameComponent
 	{
 		private Map map;
 		private SpriteFont font;
@@ -24,7 +25,7 @@ namespace TheForgottenKnight.MapComponents
 		public float CountDownTime { get => countDownTime; }
 
 		/// <summary>
-		/// Create a count down timer for the level
+		/// Create a count down timer for the level with a default position in the top left corner of the game screen
 		/// </summary>
 		/// <param name="game">The game context for the timer</param>
 		/// <param name="map">The map context for the timer</param>
@@ -38,7 +39,14 @@ namespace TheForgottenKnight.MapComponents
 			startCountDownTime = countDownTime;
 		}
 
-		public CountDownTimer(Game game, Map map, float countDownTime, Vector2 position) : base(game)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="game">The game context for the timer</param>
+        /// <param name="map">The map context for the timer</param>
+        /// <param name="countDownTime">The start time of the timer</param>
+        /// <param name="position"></param>
+        public CountDownTimer(Game game, Map map, float countDownTime, Vector2 position) : base(game)
 		{
 			this.map = map;
 			this.font = Shared.labelFont;

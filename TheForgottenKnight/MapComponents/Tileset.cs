@@ -1,17 +1,18 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/* Tileset.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created        
+ */
+
+using Microsoft.Xna.Framework.Graphics;
 using TiledCS;
 
 namespace TheForgottenKnight.MapComponents
 {
-	/// <summary>
-	/// Tileset used for drawing map components
-	/// </summary>
-	public class Tileset
+    /// <summary>
+    /// Tileset used for drawing map components
+    /// </summary>
+    public class Tileset
 	{
 		private TiledTileset tiledTileset;
 		private Texture2D tex;
