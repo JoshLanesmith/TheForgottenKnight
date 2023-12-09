@@ -1,23 +1,24 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* BaseInteractiveObject.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.12.04: Created        
+ */
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight.MapComponents
 {
-	/// <summary>
-	/// Abstract class used for all interactive map objects that can move and be collided with
-	/// </summary>
-	public abstract class BaseInteractiveObject : DrawableGameComponent
+    /// <summary>
+    /// Abstract class used for all interactive map objects that can move and be collided with
+    /// </summary>
+    public abstract class BaseInteractiveObject : DrawableGameComponent
 	{
 		protected int tiledEditorObjectOriginAdjustment;
 		protected Map map;
 		protected Texture2D tex;
-		protected float originalX;
-		protected float originalY;
+		protected float startingX;
+		protected float startingY;
 		protected int originalTilesetRow;
 		protected int originalTilesetColumn;
 		protected int width;
@@ -51,19 +52,23 @@ namespace TheForgottenKnight.MapComponents
 		public BaseInteractiveObject(Game game, Map map, Texture2D tex,
 			 int width, int height, int tilesetRow, int tilesetColumn, float startingX, float startingY) : base(game)
 		{
+			// Account for TiledObject teating the tile origin as the bottom left corner of the tile
+			tiledEditorObjectOriginAdjustment = -height;
+			
 			this.map = map;
 			this.tex = tex;
 			this.width = width;
 			this.height = height;
 			this.tilesetRow = tilesetRow;
 			this.tilesetColumn = tilesetColumn;
+            position = new Vector2(this.startingX, this.startingY);
+			tilesetRec = new Rectangle(width * tilesetColumn, height * tilesetRow, width, height);
+
+			// Set data required to reset the object within the map
+			this.startingX = startingX;
+			this.startingY = startingY + tiledEditorObjectOriginAdjustment;
 			originalTilesetRow = tilesetRow;
 			originalTilesetColumn = tilesetColumn;
-			tiledEditorObjectOriginAdjustment = -height;
-			this.originalX = startingX;
-			this.originalY = startingY + tiledEditorObjectOriginAdjustment;
-			position = new Vector2(originalX, originalY);
-			tilesetRec = new Rectangle(width * tilesetColumn, height * tilesetRow, width, height);
 		}
 
 		/// <summary>
@@ -75,18 +80,20 @@ namespace TheForgottenKnight.MapComponents
 			return new Rectangle((int)position.X, (int)position.Y, width - 1, height - 1);
 		}
 
+		/// <summary>
+		/// Reset the object to its original starting position
+		/// </summary>
 		public virtual void ResetPosition()
 		{
-			tilesetRow = originalTilesetRow;
-			tilesetColumn = originalTilesetColumn;
-			tilesetRec = new Rectangle(width * tilesetColumn, height * tilesetRow, width, height);
-			position = new Vector2(this.originalX , this.originalY);
+			tilesetRec.X = width * originalTilesetColumn;
+			tilesetRec.X = height * originalTilesetRow;
+			position.X = startingX;
+			position.Y = startingY;
 		}
 
 		public override void Draw(GameTime gameTime)
 		{
 			Shared.sb.Begin();
-			//Shared.sb.Draw(tex, position, tilesetRec, Color.White);
 			Shared.sb.Draw(tex, position * map.MapScaleFactor + Shared.displayPosShift, tilesetRec, Color.White, 0f, new Vector2(), map.MapScaleFactor, SpriteEffects.None, 0);
 
 			Shared.sb.End();

@@ -1,15 +1,15 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* Door.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created        
+ */
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight.MapComponents
 {
-	public class Door : BaseInteractiveObject
+    public class Door : BaseInteractiveObject
 	{
 		private bool isUnlocked;
 		private bool isLevelCompleteDoor;
@@ -62,7 +62,10 @@ namespace TheForgottenKnight.MapComponents
 			}
 		}
 
-		public override void ResetPosition()
+        /// <summary>
+        /// Reset the door to its original starting position and set it to locked
+        /// </summary>
+        public override void ResetPosition()
 		{
 			isUnlocked = false;
 			base.ResetPosition();
@@ -70,6 +73,7 @@ namespace TheForgottenKnight.MapComponents
 
 		public override void Update(GameTime gameTime)
 		{
+			// Mark the level as won if the level complete door is unlocked
 			if (isLevelCompleteDoor && isUnlocked)
 			{
 				map.CurrentLevelStatus = LevelStatus.Won;
