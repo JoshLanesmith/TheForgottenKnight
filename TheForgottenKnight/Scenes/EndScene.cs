@@ -19,18 +19,22 @@ namespace TheForgottenKnight.Scenes
 		private HighScoreManager highScoreManager;
 		private ButtonComponent saveButton;
 		private ButtonComponent cancelButton;
+		private ButtonComponent exitButton;
 		private Vector2 topBannerPosition;
 		private Vector2 tablePosition;
 		private Vector2 button1Position;
 		private Vector2 button2Position;
+		private Vector2 button3Position;
 		private Color regularColor = Color.Black;
 		private SoundEffect saveClick;
 		private SoundEffect cancelClick;
         private CustomCursor cursor;
+		private float scrollPanelScalingFactor;
 
         public EndScene(Game game, Player player) : base(game)
-		{
-			this.player = player;
+        {
+            Game1 g = (Game1)game;
+            this.player = player;
 			newScore = new Score();
 			stringInputManager = new StringInputManager(game);
 			Components.Add(stringInputManager);
@@ -39,18 +43,65 @@ namespace TheForgottenKnight.Scenes
 			highScoreManager = new HighScoreManager(game, newScore, tablePosition);
 			Components.Add(highScoreManager);
 
-			Texture2D cancelButtonTex = Game.Content.Load<Texture2D>("images/buttons/cancelButton");
-			cancelClick = Game.Content.Load<SoundEffect>("sfx/end-menu-sfx/cancel");
+			scrollPanelScalingFactor = Shared.gameDisplaySize.X / Shared.gameWonBgImage.Width;
 
-			button1Position = tablePosition + new Vector2(Shared.scrollPnlImage.Width / 2 - cancelButtonTex.Width - 10, Shared.scrollPnlImage.Height + 20);
-			button2Position = tablePosition + new Vector2(Shared.scrollPnlImage.Width / 2 + 10, Shared.scrollPnlImage.Height + 20);
 
-			cancelButton = new ButtonComponent(game, button1Position, cancelButtonTex, () => {
+            Texture2D cancelButtonTex = Game.Content.Load<Texture2D>("images/buttons/cancelButton");
+			Dictionary<ButtonStatus, Texture2D> cancelButtonTextures = new Dictionary<ButtonStatus, Texture2D>()
+            {
+				{ButtonStatus.Neutral, Game.Content.Load<Texture2D>("images/buttons/cancelButton") },
+				{ButtonStatus.Hover, Game.Content.Load<Texture2D>("images/buttons/cancelButton1h") },
+				{ButtonStatus.Clicked, Game.Content.Load<Texture2D>("images/buttons/cancelButton1d") }
+			};
+
+            Dictionary<ButtonStatus, Texture2D> saveButtonTextures = new Dictionary<ButtonStatus, Texture2D>()
+            {
+                {ButtonStatus.Neutral, Game.Content.Load<Texture2D>("images/buttons/saveButton") },
+                {ButtonStatus.Hover, Game.Content.Load<Texture2D>("images/buttons/saveButton1h") },
+                {ButtonStatus.Clicked, Game.Content.Load<Texture2D>("images/buttons/saveButton1d") },
+                {ButtonStatus.Disabled, Game.Content.Load<Texture2D>("images/buttons/saveButtonDisabled") }
+            };
+
+            Dictionary<ButtonStatus, Texture2D> exitButtonTextures = new Dictionary<ButtonStatus, Texture2D>()
+            {
+                {ButtonStatus.Neutral, Game.Content.Load<Texture2D>("images/buttons/exitButton") },
+                {ButtonStatus.Hover, Game.Content.Load<Texture2D>("images/buttons/exitButton1h") },
+                {ButtonStatus.Clicked, Game.Content.Load<Texture2D>("images/buttons/exitButton1d") }
+            };
+
+            cancelClick = Game.Content.Load<SoundEffect>("sfx/end-menu-sfx/cancel");
+            saveClick = Game.Content.Load<SoundEffect>("sfx/end-menu-sfx/save");
+
+            int numberOfButtons = 3;
+			int buttonGap = 20;
+			int buttonWidth = (Shared.scrollPnlImage.Width - (buttonGap * (numberOfButtons - 1))) /3;
+			float btnScalingFactor = scrollPanelScalingFactor * ((float)buttonWidth / cancelButtonTextures[ButtonStatus.Neutral].Width);
+
+
+            button1Position = tablePosition + new Vector2(0, Shared.scrollPnlImage.Height + 20);
+			button2Position = button1Position + new Vector2(buttonWidth + buttonGap, 0);
+			button3Position = button2Position + new Vector2(buttonWidth + buttonGap, 0);
+
+			cancelButton = new ButtonComponent(game, button1Position, cancelButtonTextures, buttonWidth, btnScalingFactor, () => {
 				cancelClick.Play();
-				Game1 g = (Game1)game;
 				g.ResetGame();
 			});
 			Components.Add(cancelButton);
+
+            saveButton = new ButtonComponent(game, button2Position, saveButtonTextures, buttonWidth, btnScalingFactor, () =>
+			{
+                saveClick.Play();
+                highScoreManager.SaveHighScores();
+				g.ResetGame();
+			});
+            Components.Add(saveButton);
+
+            exitButton = new ButtonComponent(game, button3Position, exitButtonTextures, buttonWidth, btnScalingFactor, () =>
+			{
+                cancelClick.Play();
+				g.ExitGame();
+            });
+            Components.Add(exitButton);
 
             cursor = new CustomCursor(game);
             Components.Add(cursor);
@@ -66,20 +117,9 @@ namespace TheForgottenKnight.Scenes
 				newScore.LevelsCompleted = player.LevelsCompleted; 
 				newScore.TimeSpent = player.TimeSpent;
 
-				if (highScoreManager.NewScoreIsHighScore(newScore))
+				if (!highScoreManager.NewScoreIsHighScore(newScore))
 				{
-					Texture2D saveButtonTex = Game.Content.Load<Texture2D>("images/buttons/saveButton");
-					saveClick = Game.Content.Load<SoundEffect>("sfx/end-menu-sfx/save");
-
-					saveButton = new ButtonComponent(Game, button2Position, saveButtonTex, () => {
-						saveClick.Play();
-						highScoreManager.SaveHighScores();
-						Game1 g = (Game1)Game;
-						g.ResetGame();
-
-					});
-					//Components.Add(saveButton);
-					Components.Insert(Components.Count() - 2, saveButton);
+					saveButton.ButtonStatus = ButtonStatus.Disabled;
 				}
 			}
 
@@ -92,7 +132,7 @@ namespace TheForgottenKnight.Scenes
 		{
 			Shared.sb.Begin();
 			Shared.sb.Draw(Shared.gameWonBgImage, Shared.displayPosShift, new Rectangle(0, 0, Shared.gameWonBgImage.Width, Shared.gameWonBgImage.Height),
-                Color.White, 0.0f, Vector2.Zero, Shared.gameDisplaySize.X / Shared.gameWonBgImage.Width, SpriteEffects.None, 0);
+                Color.White, 0.0f, Vector2.Zero, scrollPanelScalingFactor, SpriteEffects.None, 0);
 
 			Shared.sb.Draw(Shared.scrollPnlImageSmall, topBannerPosition + Shared.displayPosShift, new Rectangle(0, 0, Shared.scrollPnlImageSmall.Width, Shared.scrollPnlImageSmall.Height),
 				Color.White);

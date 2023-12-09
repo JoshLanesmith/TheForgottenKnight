@@ -60,18 +60,6 @@
 /processorParam:TextureFormat=Color
 /build:images/Ball.png
 
-#begin images/buttons/buttonCancel1h.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:images/buttons/buttonCancel1h.png
-
 #begin images/buttons/cancelButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -96,6 +84,18 @@
 /processorParam:TextureFormat=Color
 /build:images/buttons/cancelButton1d.png
 
+#begin images/buttons/cancelButton1h.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/buttons/cancelButton1h.png
+
 #begin images/buttons/exitbutton.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -107,18 +107,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/buttons/exitbutton.png
-
-#begin images/buttons/exitbutton1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:images/buttons/exitbutton1.png
 
 #begin images/buttons/exitButton1d.png
 /importer:TextureImporter
@@ -179,6 +167,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/buttons/saveButton1h.png
+
+#begin images/buttons/saveButtonDisabled.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/buttons/saveButtonDisabled.png
 
 #begin images/cancel_red.png
 /importer:TextureImporter
