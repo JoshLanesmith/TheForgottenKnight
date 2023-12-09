@@ -27,6 +27,7 @@ namespace TheForgottenKnight
 		private ActionScene actionScene;
 		private EndScene endScene;
 		private HighScoreScene highScoreScene;
+		private CreditScene creditScene;
 
 		public SpriteBatch SpriteBatch { get => _spriteBatch; set => _spriteBatch = value; }
 		public GameScene PreviousScene { get => previousScene; set => previousScene = value; }
@@ -113,6 +114,9 @@ namespace TheForgottenKnight
 
 			highScoreScene = new HighScoreScene(this);
 			this.Components.Add(highScoreScene);
+
+			creditScene = new CreditScene(this);
+			this.Components.Add(creditScene);
 
 			// Show startScene at the beginning
 			startScene.Show();
@@ -204,6 +208,13 @@ namespace TheForgottenKnight
 					PreviousScene = CurrentScene;
 					highScoreScene.Show();
 				
+				}
+				else if (selectedIndex == 3 && ks.IsKeyDown(Keys.Enter))
+				{
+					menuSelectSfx.Play();
+					startScene.Hide();
+					PreviousScene = CurrentScene;
+					creditScene.Show();
 				}
 				else if (selectedIndex == 4 && ks.IsKeyDown(Keys.Enter))
 				{
