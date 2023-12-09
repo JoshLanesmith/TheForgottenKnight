@@ -40,7 +40,8 @@ namespace TheForgottenKnight
             this.position = position;
             this.defaultColor = defaultColor;
             this.highlightColor = highlightColor;
-            Bounds = new Rectangle((int)position.X, (int)position.Y + defaultFont.LineSpacing, (int)defaultFont.MeasureString(message).X, defaultFont.LineSpacing);
+            //Bounds = new Rectangle((int)position.X, (int)position.Y + defaultFont.LineSpacing, (int)defaultFont.MeasureString(message).X, defaultFont.LineSpacing);
+            Bounds = new Rectangle((int)position.X, (int)position.Y, (int)defaultFont.MeasureString(message).X, defaultFont.LineSpacing);
             drawFont = defaultFont;
             drawColor = defaultColor;
             this.onClick = onClick;

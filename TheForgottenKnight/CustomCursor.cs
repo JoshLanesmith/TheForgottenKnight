@@ -25,7 +25,7 @@ namespace TheForgottenKnight
             MouseState ms = Mouse.GetState();
             Point mousePoint = new Point(ms.X, ms.Y);
 
-            this.mousePoint = new Vector2(mousePoint.X, mousePoint.Y - 24);
+            this.mousePoint = new Vector2(mousePoint.X, mousePoint.Y);
 
             base.Update(gameTime);
         }
