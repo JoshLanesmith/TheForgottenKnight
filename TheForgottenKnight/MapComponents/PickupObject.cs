@@ -1,6 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* PickupObject.cs
+ * The Forgotten Knight
+ *	Revision History
+ *			Josh Lanesmith, 2023.11.26: Created
+ *			Miles Purvis, 2023.12.09: Added Animation
+ */
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct2D1.Effects;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +16,16 @@ using System.Threading.Tasks;
 
 namespace TheForgottenKnight.MapComponents
 {
+
 	/// <summary>
-	/// 
+	/// Pickup object inherits from baseclass to loop through the tiledmap
+	/// to find the frame and apply attributes of isLevelKey
 	/// </summary>
 	public class PickupObject : BaseInteractiveObject
 	{
+
+		private float frameDuration;
+		private float elapsedTime;
 		private bool isLevelKey;
 
 		/// <summary>
@@ -33,6 +45,8 @@ namespace TheForgottenKnight.MapComponents
 			: base(game, map, tex, width, height, tilesetRow, tilesetColumn, startingX, startingY)
 		{
 			this.IsLevelKey = isLevelKey;
+			elapsedTime = 0f;
+			frameDuration = 0.1f;
 		}
 
 		public bool IsLevelKey { get => isLevelKey; set => isLevelKey = value; }
@@ -44,6 +58,29 @@ namespace TheForgottenKnight.MapComponents
 		public void PickupItem(Vector2 bagPosition)
 		{
 			position = bagPosition;
+		}
+
+		/// <summary>
+		/// Override game time and update key frames for animation
+		/// </summary>
+		/// <param name="gameTime">GameTime = current elapsed time</param>
+		public override void Update(GameTime gameTime)
+		{
+			elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+			if (elapsedTime > frameDuration)
+			{
+				elapsedTime = 0f;
+				tilesetColumn++;
+				if (tilesetColumn == tex.Width/width) 
+				{
+					tilesetColumn = 0;
+				}
+			}
+
+			tilesetRec.X = width * tilesetColumn;
+
+			base.Update(gameTime);
 		}
 	}
 }

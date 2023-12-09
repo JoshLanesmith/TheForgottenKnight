@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using TheForgottenKnight.Scenes;
@@ -85,7 +86,7 @@ namespace TheForgottenKnight
 			Shared.highscoreSong = this.Content.Load<Song>("sfx/songs/highscore_song");
 			Shared.helpSong = this.Content.Load<Song>("sfx/songs/help_song");
 			Shared.gameSong = this.Content.Load<Song>("sfx/songs/game_song");
-
+			
 			MediaPlayer.IsRepeating = true;
 			MediaPlayer.Volume = 0.1f;
 
