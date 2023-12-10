@@ -1,14 +1,18 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* DrawableRectangle.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.12.05: Created
+ */
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct3D9;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight
 {
+    /// <summary>
+    /// Drawable rectangle to draw background panels
+    /// </summary>
     public class DrawableRectangle : DrawableGameComponent
     {
         private Texture2D tex;
@@ -20,7 +24,15 @@ namespace TheForgottenKnight
         private Byte transparencyAmount;
         private Rectangle panel;
 
-
+        /// <summary>
+        /// Create a rectangle with a transparency factor
+        /// </summary>
+        /// <param name="game">The game context for the ButtonComponent</param>
+        /// <param name="width">Width of the rectangle</param>
+        /// <param name="height">Height of the rectangle</param>
+        /// <param name="position">Position of the top left corner</param>
+        /// <param name="color">Color of the rectangle</param>
+        /// <param name="transparencyAmount">Transparency of the rectangle</param>
         public DrawableRectangle(Game game, int width, int height, Vector2 position, Color color, byte transparencyAmount) : base(game)
         {
             this.width = width;
@@ -32,11 +44,14 @@ namespace TheForgottenKnight
 
             tex = new Texture2D(game.GraphicsDevice, 1, 1, false, SurfaceFormat.Color);
 
+            // Apply the transparency for the color
             this.transparentColor[0] = Color.FromNonPremultiplied(255, 255, 255 , transparencyAmount);
             tex.SetData<Color>(this.transparentColor);
 
             panel = new Rectangle((int)position.X, (int)position.Y, width, height);
-            panel.Inflate(15, 15); //pad by 5 pixels
+
+            // Pad the rectangle by 15 pixels
+            panel.Inflate(15, 15);
         }
 
         public override void Draw(GameTime gameTime)

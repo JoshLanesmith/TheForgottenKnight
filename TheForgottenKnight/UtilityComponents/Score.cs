@@ -1,16 +1,15 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/* Score.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created
+ */
 
 namespace TheForgottenKnight
 {
-	/// <summary>
-	/// Score class to store a players name and score details
-	/// </summary>
-	public class Score
+    /// <summary>
+    /// Score class to store a players name and score details
+    /// </summary>
+    public class Score
 	{
 		private string playerName;
 		private int levelsCompleted;

@@ -1,20 +1,23 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* MenuComponent.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created
+ */
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TheForgottenKnight.Scenes;
 
 namespace TheForgottenKnight
 {
-	/// <summary>
-	/// MenuComonent used to draw the menu items and toggle the selected menu items
-	/// </summary>
-	public class MenuComponent : DrawableGameComponent
+    /// <summary>
+    /// MenuComonent used to draw the menu items and toggle the selected menu items
+    /// </summary>
+    public class MenuComponent : DrawableGameComponent
 	{
 		//Menu Components
 		private GameScene scene;
@@ -30,9 +33,7 @@ namespace TheForgottenKnight
 		private Vector2 position;
 		private Vector2 titlePos;
 		private Color regularColor = Color.Black;
-		//private Color highlightColor = Color.Brown;
 		private Color highlightColor = new Color(135, 18, 18);
-		//private Color highlightColor = new Color(99, 20, 20);
 
 		private List<ClickableString> menuItems;
 
@@ -44,8 +45,10 @@ namespace TheForgottenKnight
         /// Generate menu items with an array of strings for the menu items' text
         /// Loads soundEffects to play while traversing the menu
         /// </summary>
-        /// <param name="game">The game context for the nenu</param>
+        /// <param name="game">The game context for the menu</param>
+		/// <param name="scene">The game scene context for the menu</param>
         /// <param name="menuStrings">Array of strings for the menu items</param>
+		/// <param name="menuActions">Array of actions for the menu items</param>
         public MenuComponent(Game game, GameScene scene, string[] menuStrings, ClickableString.OnClick[] menuActions) : base(game)
 		{
 			Game1 g = (Game1)game;
@@ -63,7 +66,7 @@ namespace TheForgottenKnight
 			position = new Vector2(Shared.stage.X / 2, Shared.stage.Y / 2);
 
 
-            //Values for Draw Position
+            // Values for Draw Position
             #region Values
             int screenWidth = GraphicsDevice.Viewport.Width;
             int screenHeight = GraphicsDevice.Viewport.Height;
@@ -75,13 +78,14 @@ namespace TheForgottenKnight
             int startX = (screenWidth - (int)regularFont.MeasureString(this.menuStrings[0]).X) / 2;
             #endregion
 
-            //Position Vectors
+            // Position Vectors
             Vector2 tempPos = new Vector2(startX, startY);
             titlePos = new Vector2((screenWidth - titleWidth) / 2, startY  - titleOffsetY);
 
 			backPanel = new DrawableRectangle(game, titleWidth, titleOffsetY + totalMenuHeight, titlePos, new Color(120, 120, 120), 150);
 			scene.Components.Add(backPanel);
 
+			// Instantiate each clickable string and add them to the scene components
             for (int i = 0; i < this.menuStrings.Count(); i++)
             {
 
@@ -134,6 +138,7 @@ namespace TheForgottenKnight
             MouseState ms = Mouse.GetState();
             Point mousePoint = new Point(ms.X, ms.Y);
 
+			// Update the selecte menu item when the mouse moves and it is hovering over one of the menu items
 			if (mousePoint != oldMousePoint)
 			{
 				oldMousePoint = mousePoint;
@@ -141,15 +146,19 @@ namespace TheForgottenKnight
 				{
 					if (menuItem.Bounds.Contains(mousePoint) && menuItems[SelectedIndex] != menuItem)
 					{
+						// Toggle the previously selected menu item
 						menuItems[SelectedIndex].ToggleSelected();
+
+						// Toggle the currently selected menu item and update the hover status
 						menuItem.ToggleSelected();
 						menuItem.ButtonStatus = ButtonStatus.Hover;
 						menuHoverSFX.Play();
+
+						// Update the selected index to that of the currently selected menu item
 						SelectedIndex = menuItems.IndexOf(menuItem);
 					}
 				} 
 			}
-
 
             oldState = ks;
 			base.Update(gameTime);

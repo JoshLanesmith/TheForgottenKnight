@@ -1,15 +1,20 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* ButtonComponent.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created
+ *            Josh Lanesmith, 2023.12.09: ButtonAnimation
+ */
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight
 {
+    /// <summary>
+    /// Track the status of buttons to help handle animation and when to trigger events
+    /// </summary>
     public enum ButtonStatus
     {
         Neutral,
@@ -47,20 +52,10 @@ namespace TheForgottenKnight
         /// </summary>
         /// <param name="game">The game context for the ButtonComponent</param>
         /// <param name="position">The postion of the button's top left corner</param>
-        /// <param name="tex">The image used for the button</param>
+        /// <param name="buttonTextures">Dictionary to map button textures to each button status</param>
+        /// <param name="buttonWidth">Width of the button</param>
+        /// <param name="scale">Scaling factor to apply to the button's display</param>
         /// <param name="onClick">The OnClick fuction to be executed</param>
-        public ButtonComponent(Game game, Vector2 position, Texture2D tex, OnClick onClick) : base(game)
-        {
-            this.tex = tex;
-            this.onClick = onClick;
-
-            this.position = position + Shared.displayPosShift;
-
-            boundaries = new Rectangle((int)this.position.X, (int)this.position.Y, tex.Width, tex.Height);
-
-            ButtonStatus = ButtonStatus.Neutral;
-        }
-
         public ButtonComponent(Game game, Vector2 position, Dictionary<ButtonStatus, Texture2D> buttonTextures, int buttonWidth, float scale, OnClick onClick) : base(game)
         {
             this.buttonTextures = buttonTextures;
@@ -78,28 +73,31 @@ namespace TheForgottenKnight
 
         public override void Update(GameTime gameTime)
         {
+            // Check if the button is disabled or not
             if (ButtonStatus != ButtonStatus.Disabled)
             {
+                // Track the location of the mouse point and the current state of the left mouse button
                 MouseState ms = Mouse.GetState();
                 Point mousePoint = new Point(ms.X, ms.Y);
-
                 currentLeftButtonState = ms.LeftButton;
 
                 // Check if the button is hovered over by the mouse and clicked
                 if (boundaries.Contains(mousePoint))
                 {
+                    // Set the button status to Hover when the mouse point is over the button and the left mouse button is released
                     if (currentLeftButtonState == ButtonState.Released)
                     {
-
                         ButtonStatus = ButtonStatus.Hover;
                     }
 
+                    // Set the button status to Clicked when the left button is initially clicked and update the previous left button state variable
                     if (currentLeftButtonState == ButtonState.Pressed && previousLeftButtonState == ButtonState.Released)
                     {
                         ButtonStatus = ButtonStatus.Clicked;
                         previousLeftButtonState = currentLeftButtonState;
 
                     }
+                    // Trigger the onClick event when the left button is released after clicking the button
                     else if (currentLeftButtonState == ButtonState.Released && previousLeftButtonState == ButtonState.Pressed)
                     {
                         onClick();
@@ -110,7 +108,6 @@ namespace TheForgottenKnight
                     ButtonStatus = ButtonStatus.Neutral;
                 }
             }
-
 
             base.Update(gameTime);
         }

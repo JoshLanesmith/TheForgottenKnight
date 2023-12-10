@@ -1,15 +1,18 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* ClickableString.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.12.05: Created
+ */
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight
 {
+    /// <summary>
+    /// Clickable string to display a tring with boundaries to track the mouse point and trigger an event
+    /// </summary>
     public class ClickableString : DrawableGameComponent
     {
         /// <summary>
@@ -31,6 +34,17 @@ namespace TheForgottenKnight
         public Rectangle Bounds { get => boundaries; set => boundaries = value; }
         public ButtonStatus ButtonStatus { get => buttonStatus; set => buttonStatus = value; }
 
+        /// <summary>
+        /// Create a clickable string with a specified message and onClick event
+        /// </summary>
+        /// <param name="game">The game context for the ClickaleString</param>
+        /// <param name="defaultFont">The default font used to display the text</param>
+        /// <param name="highlightFont">The font used to highlight the text when the item is selected</param>
+        /// <param name="message">The string displayed as the clickable item</param>
+        /// <param name="position">The position of the top left point of the string</param>
+        /// <param name="defaultColor">The default color used to display the text</param>
+        /// <param name="highlightColor">The color used to highlight the text when the item is selected</param>
+        /// <param name="onClick">The OnClick fuction to be executed</param>
         public ClickableString(Game game, SpriteFont defaultFont, SpriteFont highlightFont, string message, Vector2 position,
             Color defaultColor, Color highlightColor, OnClick onClick) : base(game)
         {
@@ -40,7 +54,6 @@ namespace TheForgottenKnight
             this.position = position;
             this.defaultColor = defaultColor;
             this.highlightColor = highlightColor;
-            //Bounds = new Rectangle((int)position.X, (int)position.Y + defaultFont.LineSpacing, (int)defaultFont.MeasureString(message).X, defaultFont.LineSpacing);
             Bounds = new Rectangle((int)position.X, (int)position.Y, (int)defaultFont.MeasureString(message).X, defaultFont.LineSpacing);
             drawFont = defaultFont;
             drawColor = defaultColor;
@@ -51,6 +64,9 @@ namespace TheForgottenKnight
 
         }
 
+        /// <summary>
+        /// Toggle the item between selected and not selected
+        /// </summary>
         public void ToggleSelected()
         {
             isSelected = !isSelected;
@@ -64,9 +80,11 @@ namespace TheForgottenKnight
             // Check if the button is hovered over by the mouse and clicked
             if (isSelected)
             {
+                // Update the color and font used to draw the item when highlighted
                 drawColor = highlightColor;
                 drawFont = highlightFont;
 
+                // Trigger the onClick event when the left mouse button is clicked
                 if (Bounds.Contains(mousePoint) && ms.LeftButton == ButtonState.Pressed && ButtonStatus == ButtonStatus.Hover)
                 {
                     ButtonStatus = ButtonStatus.Clicked;
@@ -76,6 +94,7 @@ namespace TheForgottenKnight
             }
             else
             {
+                // Reset the draw color and font to the default state
                 drawColor = defaultColor;
                 drawFont = defaultFont;
                 ButtonStatus = ButtonStatus.Neutral;
@@ -88,8 +107,6 @@ namespace TheForgottenKnight
             Shared.sb.Begin();
             Shared.sb.DrawString(drawFont, message, position, drawColor);
             Shared.sb.End();
-            //Debug.WriteLine(position);
-
             base.Draw(gameTime);
         }
     }

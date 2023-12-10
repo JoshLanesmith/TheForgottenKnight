@@ -1,18 +1,20 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿/* HighScoreManager.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created
+ */
+
+using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight
 {
-	/// <summary>
-	/// HighScoreManager used to load, save, update, and display the high scores
-	/// </summary>
-	public class HighScoreManager : DrawableGameComponent
+    /// <summary>
+    /// HighScoreManager used to load, save, update, and display the high scores
+    /// </summary>
+    public class HighScoreManager : DrawableGameComponent
 	{
 		private List<Score> highScores;
 		private string fileName;
@@ -66,7 +68,6 @@ namespace TheForgottenKnight
 		/// <summary>
 		/// Load high scores from a text file into a list of Scores
 		/// </summary>
-		/// <returns>Returns a List<Score></returns>
 		public void LoadHighScores()
 		{
             HighScores = new List<Score>(); ;
@@ -168,8 +169,7 @@ namespace TheForgottenKnight
 		{
 			Shared.sb.Begin();
 
-			//Shared.sb.Draw(Shared.scrollPnlImage, tablePosition, new Rectangle(0, 0, Shared.scrollPnlImage.Width, Shared.scrollPnlImage.Height),
-				//Color.White, 0.0f, Vector2.Zero, 1, SpriteEffects.None, 0);
+			// Draw the scroll panel
 			Shared.sb.Draw(Shared.scrollPnlImage, tablePosition, Color.White);
 
 			// Table Title

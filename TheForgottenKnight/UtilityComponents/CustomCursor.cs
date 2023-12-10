@@ -1,20 +1,27 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* CustomCursor.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.12.08: Created
+ */
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheForgottenKnight.Scenes;
 
 namespace TheForgottenKnight
 {
+    /// <summary>
+    /// Custom cursor to display a mouse cursor for this game
+    /// </summary>
     public class CustomCursor : DrawableGameComponent
     {
         private Vector2 mousePoint;
         private Texture2D tex;
 
+        /// <summary>
+        /// Create a custom cursor to be displayed
+        /// </summary>
+        /// <param name="game"></param>
         public CustomCursor(Game game) : base(game)
         {
             tex = game.Content.Load<Texture2D>("images/FantasyCursor");
