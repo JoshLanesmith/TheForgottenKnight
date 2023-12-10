@@ -6,18 +6,13 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight
 {
-	/// <summary>
-	/// Parallax component handles moveable background 
-	/// </summary>
-	public class Parallax : DrawableGameComponent
+    /// <summary>
+    /// Parallax component handles moveable background 
+    /// </summary>
+    public class Parallax : DrawableGameComponent
 	{
 		private Texture2D tex;
 		private Rectangle srcRec;

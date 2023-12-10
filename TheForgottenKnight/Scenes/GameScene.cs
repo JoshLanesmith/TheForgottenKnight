@@ -4,13 +4,7 @@
  *            Josh Lanesmith, 2023.11.20: Created        
  */
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics.PackedVector;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight.Scenes
 {

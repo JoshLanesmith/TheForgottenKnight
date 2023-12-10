@@ -6,22 +6,15 @@
  */
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct2D1.Effects;
-using SharpDX.Direct3D9;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight.MapComponents
 {
 
-	/// <summary>
-	/// Pickup object inherits from baseclass to loop through the tiledmap
-	/// to find the frame and apply attributes of isLevelKey
-	/// </summary>
-	public class PickupObject : BaseInteractiveObject
+    /// <summary>
+    /// Pickup object inherits from baseclass to loop through the tiledmap
+    /// to find the frame and apply attributes of isLevelKey
+    /// </summary>
+    public class PickupObject : BaseInteractiveObject
 	{
 
 		private float frameDuration;

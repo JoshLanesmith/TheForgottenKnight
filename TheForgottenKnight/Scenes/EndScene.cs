@@ -6,20 +6,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace TheForgottenKnight.Scenes
 {
-	/// <summary>
-	/// Represents the end game scene in the game, displaying scores, providing options to save scores, exit the game, or restart.
-	/// </summary>
-	public class EndScene : GameScene
+    /// <summary>
+    /// Represents the end game scene in the game, displaying scores, providing options to save scores, exit the game, or restart.
+    /// </summary>
+    public class EndScene : GameScene
 	{
 		private Player player;
 		private Score newScore;

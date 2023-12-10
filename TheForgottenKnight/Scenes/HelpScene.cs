@@ -4,21 +4,14 @@
  *            Josh Lanesmith, 2023.12.01: Created        
  */
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TiledCS;
 
 namespace TheForgottenKnight.Scenes
 {
-	/// <summary>
-	/// Represents a scene dedicated to providing help and instructions to the player.
-	/// </summary>
-	public class HelpScene : GameScene
+    /// <summary>
+    /// Represents a scene dedicated to providing help and instructions to the player.
+    /// </summary>
+    public class HelpScene : GameScene
 	{
 		private HelpMap helpMap;
 		private int numberOfLevels;

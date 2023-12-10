@@ -4,22 +4,14 @@
  *            Josh Lanesmith, 2023.11.26: Created        
  */
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace TheForgottenKnight.Scenes
 {
-	/// <summary>
-	/// Represents the starting scene of the game, including the main menu.
-	/// </summary>
-	public class StartScene : GameScene
+    /// <summary>
+    /// Represents the starting scene of the game, including the main menu.
+    /// </summary>
+    public class StartScene : GameScene
 	{
 		private MenuComponent menu;
 		private CustomCursor cursor;

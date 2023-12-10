@@ -5,25 +5,20 @@
  */
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct2D1;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using TheForgottenKnight.MapComponents;
 using TiledCS;
 
 namespace TheForgottenKnight
 {
-	/// <summary>
-	/// Enum to track if a level is currently running, won, or lost.
-	/// </summary>
-	public enum LevelStatus
+    /// <summary>
+    /// Enum to track if a level is currently running, won, or lost.
+    /// </summary>
+    public enum LevelStatus
 	{
 		Running,
 		Won,

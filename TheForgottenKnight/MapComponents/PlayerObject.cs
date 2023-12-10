@@ -10,17 +10,13 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight.MapComponents
 {
-	/// <summary>
-	/// Player object to manage the movement of the player through the map.
-	/// </summary>
-	public class PlayerObject : DrawableGameComponent
+    /// <summary>
+    /// Player object to manage the movement of the player through the map.
+    /// </summary>
+    public class PlayerObject : DrawableGameComponent
 	{
 		private Map map;
 		private Texture2D[] animationSheet;

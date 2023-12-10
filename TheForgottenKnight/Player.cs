@@ -4,19 +4,13 @@
  *            Josh Lanesmith, 2023.11.20: Created        
  */
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight
 {
-	/// <summary>
-	/// Player class to track the player score throughout the levels.
-	/// </summary>
-	public class Player : GameComponent
+    /// <summary>
+    /// Player class to track the player score throughout the levels.
+    /// </summary>
+    public class Player : GameComponent
 	{
 
 

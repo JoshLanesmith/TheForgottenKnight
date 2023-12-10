@@ -8,18 +8,14 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading;
 using TheForgottenKnight.Scenes;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace TheForgottenKnight
 {
-	/// <summary>
-	/// The main class representing the game logic and managing different scenes.
-	/// </summary>
-	public class Game1 : Game
+    /// <summary>
+    /// The main class representing the game logic and managing different scenes.
+    /// </summary>
+    public class Game1 : Game
 	{
 		private GraphicsDeviceManager _graphics;
 		private SpriteBatch _spriteBatch;

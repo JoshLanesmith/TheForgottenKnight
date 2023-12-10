@@ -5,18 +5,13 @@
  */
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight
 {
-	/// <summary>
-	/// Animator class to handle sprite sheet animation.
-	/// </summary>
-	public class Animator
+    /// <summary>
+    /// Animator class to handle sprite sheet animation.
+    /// </summary>
+    public class Animator
 	{
 		private Map map;
 		private Texture2D animationSheet;

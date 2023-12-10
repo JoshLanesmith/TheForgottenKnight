@@ -4,21 +4,15 @@
  *            Josh Lanesmith, 2023.11.20: Created        
  */
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct2D1.Effects;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight.MapComponents
 {
-	/// <summary>
-	/// Represents a pushable object in the game.
-	/// </summary>
-	public class PushableObject : BaseInteractiveObject
+    /// <summary>
+    /// Represents a pushable object in the game.
+    /// </summary>
+    public class PushableObject : BaseInteractiveObject
 	{
 		private float scale = 1;
 

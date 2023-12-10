@@ -4,20 +4,15 @@
  *            Josh Lanesmith, 2023.12.4: Created        
  */
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TheForgottenKnight.MapComponents;
 using TiledCS;
 
 namespace TheForgottenKnight
 {
-	/// <summary>
-	/// Represents the Helpmap,  dedicated to providing help and instructions to the player.
-	/// </summary>
-	public class HelpMap : Map
+    /// <summary>
+    /// Represents the Helpmap,  dedicated to providing help and instructions to the player.
+    /// </summary>
+    public class HelpMap : Map
 	{
 		private Vector2 bagPosition;
 		private Vector2 timerPosition;

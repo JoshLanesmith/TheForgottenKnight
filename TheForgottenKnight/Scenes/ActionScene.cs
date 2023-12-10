@@ -4,24 +4,18 @@
  *            Josh Lanesmith, 2023.11.20: Created        
  */
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using TiledCS;
 
 namespace TheForgottenKnight.Scenes
 {
-	/// <summary>
-	/// Represents the action scene in the game, managing level progression, player stats, and game over conditions.
-	/// </summary>
-	public class ActionScene : GameScene
+    /// <summary>
+    /// Represents the action scene in the game, managing level progression, player stats, and game over conditions.
+    /// </summary>
+    public class ActionScene : GameScene
 	{
 		private Map currentLevelMap;
 		private int numberOfLevels;

@@ -5,18 +5,13 @@
  */
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheForgottenKnight.Scenes
 {
-	/// <summary>
-	/// Represents the credit scene in the game, displaying credits using a parallax scrolling background.
-	/// </summary>
-	public class CreditScene : GameScene
+    /// <summary>
+    /// Represents the credit scene in the game, displaying credits using a parallax scrolling background.
+    /// </summary>
+    public class CreditScene : GameScene
 	{
 		private Rectangle srcRec;
 		private Texture2D tex;
