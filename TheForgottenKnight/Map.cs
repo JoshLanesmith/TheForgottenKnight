@@ -1,4 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* Map.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.11.20: Created        
+ */
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct2D1;
 using System;
@@ -441,6 +446,9 @@ namespace TheForgottenKnight
 
 		#endregion
 
+		/// <summary>
+		/// Reset Map to default
+		/// </summary>
 		public void ResetMap()
 		{
 			playerObject.ResetPlayer();

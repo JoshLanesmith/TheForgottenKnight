@@ -1,7 +1,7 @@
 ﻿/* HelpScene.cs
  * The Forgotten Knight
  *    Revision History
- *            Josh Lanesmith, 2023.11.27: Created        
+ *            Josh Lanesmith, 2023.12.01: Created        
  */
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

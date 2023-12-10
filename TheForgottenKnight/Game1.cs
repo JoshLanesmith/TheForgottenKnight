@@ -1,4 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿/* Game1.cs
+ * The Forgotten Knight
+ *    Revision History
+ *            Josh Lanesmith, 2023.12.04: Created        
+ */
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,6 +16,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace TheForgottenKnight
 {
+	/// <summary>
+	/// The main class representing the game logic and managing different scenes.
+	/// </summary>
 	public class Game1 : Game
 	{
 		private GraphicsDeviceManager _graphics;
@@ -37,6 +45,9 @@ namespace TheForgottenKnight
 		//Menu SFX
 		private SoundEffect menuSelectSfx;
 
+		/// <summary>
+		/// Initializes a new instance of the Game1 class.
+		/// </summary>
 		public Game1()
 		{
 			_graphics = new GraphicsDeviceManager(this);
@@ -44,13 +55,14 @@ namespace TheForgottenKnight
 			IsMouseVisible = true;
 		}
 
+		/// <summary>
+		/// Performs initialization, including setting up display dimensions and loading assets.
+		/// </summary>
 		protected override void Initialize()
 		{
             this.IsMouseVisible = false;
             int screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
 			int screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-
-			// TODO: Add your initialization logic here
 			_graphics.IsFullScreen = true;
 			_graphics.PreferredBackBufferWidth = screenWidth;
 			_graphics.PreferredBackBufferHeight = screenHeight;
@@ -64,7 +76,6 @@ namespace TheForgottenKnight
 				new Vector2(screenHeight, screenHeight) :
 				new Vector2(screenWidth, screenWidth);
 
-			//Debug.WriteLine($"{screenWidth} {screenHeight}");
 
 			Shared.stage = new Vector2(_graphics.PreferredBackBufferWidth,
 				_graphics.PreferredBackBufferHeight);
@@ -98,7 +109,6 @@ namespace TheForgottenKnight
 			//Menu sfx
 			menuSelectSfx = this.Content.Load<SoundEffect>("sfx/start-menu-sfx/menuSelect");
 
-			// TODO: use this.Content to load your game content here
 			player = new Player(this);
 
 
@@ -125,6 +135,9 @@ namespace TheForgottenKnight
 			CurrentScene = startScene;
 		}
 
+		/// <summary>
+		/// Hides all scenes to manage switching between them.
+		/// </summary>
 		private void HideAllScenes()
 		{
 			foreach (GameComponent item in this.Components)
@@ -138,12 +151,19 @@ namespace TheForgottenKnight
 			}
 		}
 
+		/// <summary>
+		/// Initiates a delay for scene transitions.
+		/// </summary>
+		/// <param name="amountoftime">The time to wait before triggering the next scene.</param>
 		private void WaitTime(float amountoftime)
 		{
 			delay = amountoftime;
 			trigger = true;
 		}
 
+		/// <summary>
+		/// Resets the game state by creating new instances of necessary components.
+		/// </summary>
 		public void ResetGame()
 		{
 			this.Components.Remove(player);
@@ -161,10 +181,11 @@ namespace TheForgottenKnight
 			HideAllScenes();
 			PreviousScene = CurrentScene;
 			startScene.Show();
-
-
 		}
 
+		/// <summary>
+		/// Switches to the action scene.
+		/// </summary>
 		public void GoToActionScene()
 		{
             menuSelectSfx.Play();
@@ -174,6 +195,9 @@ namespace TheForgottenKnight
             MediaPlayer.Play(Shared.gameSong);
         }
 
+		/// <summary>
+		/// Switches to the Help scene.
+		/// </summary>
 		public void GoToHelpScene()
 		{
             menuSelectSfx.Play();
@@ -182,6 +206,9 @@ namespace TheForgottenKnight
             helpScene.Show();
         }
 
+		/// <summary>
+		/// Switches to the Highscore scene.
+		/// </summary>
 		public void GoToHighscoreScene()
 		{
             menuSelectSfx.Play();
@@ -189,6 +216,9 @@ namespace TheForgottenKnight
             PreviousScene = CurrentScene;
             highScoreScene.Show();
         }
+		/// <summary>
+		/// Switches to the Credit scene.
+		/// </summary>
 		public void GoToCreditScene()
 		{
 			menuSelectSfx.Play();
@@ -197,6 +227,9 @@ namespace TheForgottenKnight
 			creditScene.Show();
 		}
 
+		/// <summary>
+		/// Exits program.
+		/// </summary>
 		public void ExitGame()
 		{
 			Exit();
@@ -204,14 +237,9 @@ namespace TheForgottenKnight
 
 		protected override void Update(GameTime gameTime)
 		{
-			//if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-			//    Exit();
-
-			// TODO: Add your update logic here
+			
 			KeyboardState ks = Keyboard.GetState();
 			int selectedIndex = 0;
-
-
 
 			if (startScene.Enabled)
 			{
@@ -227,30 +255,14 @@ namespace TheForgottenKnight
 				if (selectedIndex == 0 && ks.IsKeyDown(Keys.Enter))
 				{
 					GoToActionScene();
-					//menuSelectSfx.Play();
-					//startScene.Hide();
-					//PreviousScene = CurrentScene;
-					//actionScene.Show();
-					//MediaPlayer.Play(Shared.gameSong);
 				}
 				else if (selectedIndex == 1 && ks.IsKeyDown(Keys.Enter))
 				{
 					GoToHelpScene();
-					//menuSelectSfx.Play();
-					//startScene.Hide();
-					//PreviousScene = CurrentScene;
-					//helpScene.Show();
-
 				}
 				else if (selectedIndex == 2 && ks.IsKeyDown(Keys.Enter))
 				{
 					GoToHighscoreScene();
-
-					//menuSelectSfx.Play();
-					//startScene.Hide();
-					//PreviousScene = CurrentScene;
-					//highScoreScene.Show();
-				
 				}
 				else if (selectedIndex == 3 && ks.IsKeyDown(Keys.Enter))
 				{
@@ -279,13 +291,11 @@ namespace TheForgottenKnight
 					{
 						MediaPlayer.Play(Shared.highscoreSong);
 						WaitTime(1);
-
 					}
 
 					if (delay > 0) delay -= 1f / 1000f * (float)gameTime.ElapsedGameTime.Milliseconds;
 					if (delay <= 0 && trigger)
 					{
-
 						actionScene.Hide();
 						PreviousScene = CurrentScene;
 						endScene.Show();

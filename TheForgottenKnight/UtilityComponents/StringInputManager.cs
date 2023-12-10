@@ -1,7 +1,7 @@
 ﻿/* StringInputManager.cs
  * The Forgotten Knight
  *    Revision History
- *            Josh Lanesmith, 2023.11.20: Created
+ *            Josh Lanesmith, 2023.11.24: Created
  */
 
 using Microsoft.Xna.Framework;
