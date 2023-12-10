@@ -9,14 +9,48 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
     <Title>The Forgotten Knight</Title>
     <Authors>Josh Lanesmith, Miles Purvis</Authors>
     <Description>A 2D dungeon crawler timetrial puzzle game</Description>
     <PackageIcon></PackageIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="icon.ico" />
+    <None Remove="Content\maps\1.tmx" />
+    <None Remove="Content\maps\2.tmx" />
+    <None Remove="Content\maps\help_map\help_map.tmx" />
+    <None Remove="Content\maps\tilesets\Dungeon_Tileset.tsx" />
+    <None Remove="Content\maps\tilesets\gold_key_rotate_10.tsx" />
+    <None Remove="Content\maps\tilesets\left_arched_door_tileset.tsx" />
+    <None Remove="Content\maps\tilesets\right_arched_door_tileset.tsx" />
+    <None Remove="Content\maps\tilesets\TheForgottenKnight_Help.tsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\maps\1.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\maps\2.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\maps\help_map\help_map.tmx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\maps\tilesets\Dungeon_Tileset.tsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\maps\tilesets\gold_key_rotate_10.tsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\maps\tilesets\left_arched_door_tileset.tsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\maps\tilesets\right_arched_door_tileset.tsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\maps\tilesets\TheForgottenKnight_Help.tsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.1.303" />

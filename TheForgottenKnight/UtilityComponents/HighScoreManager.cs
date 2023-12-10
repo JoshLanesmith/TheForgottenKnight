@@ -35,7 +35,7 @@ namespace TheForgottenKnight
 		public HighScoreManager(Game game, Vector2 tablePosition) : base(game)
 		{
 			fileName = "HighScores.txt";
-			HighScores = LoadHighScores();
+			LoadHighScores();
 			SortHighScores();
 			this.tablePosition = tablePosition + Shared.displayPosShift;
             column1X = 50;
@@ -52,7 +52,7 @@ namespace TheForgottenKnight
 		public HighScoreManager(Game game, Score newScore, Vector2 tablePosition) : base(game)
 		{
 			fileName = "HighScores.txt";
-			HighScores = LoadHighScores();
+			LoadHighScores();
 			SortHighScores();
 			this.newScore = newScore;
 			this.tablePosition = tablePosition + Shared.displayPosShift;
@@ -67,9 +67,9 @@ namespace TheForgottenKnight
 		/// Load high scores from a text file into a list of Scores
 		/// </summary>
 		/// <returns>Returns a List<Score></returns>
-		private List<Score> LoadHighScores()
+		public void LoadHighScores()
 		{
-			List<Score> highScores = new List<Score>(); ;
+            HighScores = new List<Score>(); ;
 
 			// Check if the file exists and create an empty .txt file if not
 			if (!File.Exists(fileName))
@@ -88,12 +88,10 @@ namespace TheForgottenKnight
 
 				Score highScore = new Score(scoreDetails[0], int.Parse(scoreDetails[1]), float.Parse(scoreDetails[2]));
 
-				highScores.Add(highScore);
+                HighScores.Add(highScore);
 			}
 
 			reader.Close();
-
-			return highScores;
 		}
 
 		/// <summary>
@@ -126,7 +124,7 @@ namespace TheForgottenKnight
 			// Compare the new Score against the currently full list of high scores to see if the new Score beat any of them
 			foreach (Score score in HighScores)
 			{
-				if (newScore.LevelsCompleted > score.LevelsCompleted || (newScore.LevelsCompleted == score.LevelsCompleted && newScore.TimeSpent > score.TimeSpent))
+				if (newScore.LevelsCompleted > score.LevelsCompleted || (newScore.LevelsCompleted == score.LevelsCompleted && newScore.TimeSpent < score.TimeSpent))
 				{
 					AddHighScore(newScore);
 					return true;

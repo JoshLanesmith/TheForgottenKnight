@@ -33,11 +33,17 @@ namespace TheForgottenKnight.Scenes
 		
 		}
 
-		/// <summary>
-		/// Draws the high score scene, displaying the background and high score manager.
-		/// </summary>
-		/// <param name="gameTime">Snapshot of the game's timing state.</param>
-		public override void Draw(GameTime gameTime)
+        public override void Show()
+        {
+			highScoreManager.LoadHighScores();
+            base.Show();
+        }
+
+        /// <summary>
+        /// Draws the high score scene, displaying the background and high score manager.
+        /// </summary>
+        /// <param name="gameTime">Snapshot of the game's timing state.</param>
+        public override void Draw(GameTime gameTime)
         {
 			Shared.sb.Begin();
             Shared.sb.Draw(Shared.highscoreBgImage, Shared.displayPosShift, new Rectangle(0, 0, Shared.highscoreBgImage.Width, Shared.highscoreBgImage.Height),

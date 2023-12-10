@@ -54,6 +54,12 @@ namespace TheForgottenKnight.MapComponents
 		{
 			// Account for TiledObject teating the tile origin as the bottom left corner of the tile
 			tiledEditorObjectOriginAdjustment = -height;
+
+			// Set data required to reset the object within the map
+			this.startingX = startingX;
+			this.startingY = startingY + tiledEditorObjectOriginAdjustment;
+			originalTilesetRow = tilesetRow;
+			originalTilesetColumn = tilesetColumn;
 			
 			this.map = map;
 			this.tex = tex;
@@ -63,17 +69,11 @@ namespace TheForgottenKnight.MapComponents
 			this.tilesetColumn = tilesetColumn;
             position = new Vector2(this.startingX, this.startingY);
 			tilesetRec = new Rectangle(width * tilesetColumn, height * tilesetRow, width, height);
-
-			// Set data required to reset the object within the map
-			this.startingX = startingX;
-			this.startingY = startingY + tiledEditorObjectOriginAdjustment;
-			originalTilesetRow = tilesetRow;
-			originalTilesetColumn = tilesetColumn;
 		}
 
 		/// <summary>
 		/// Get the rctangle bounds of the object for collision detection
-		/// </summary>
+		/// </summary>s
 		/// <returns>Return a Rectangle as the current bounds of the object</returns>
 		public Rectangle GetBounds()
 		{
@@ -86,7 +86,7 @@ namespace TheForgottenKnight.MapComponents
 		public virtual void ResetPosition()
 		{
 			tilesetRec.X = width * originalTilesetColumn;
-			tilesetRec.X = height * originalTilesetRow;
+			tilesetRec.Y = height * originalTilesetRow;
 			position.X = startingX;
 			position.Y = startingY;
 		}
