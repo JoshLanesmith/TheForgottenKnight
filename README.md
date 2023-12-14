@@ -1,6 +1,7 @@
 # TheForgottenKnight
-2D top view dungeon crawler puzzle game 
-Itch.io Page: [The Forgotten Knight](https://topchickenturtle.itch.io/the-forgotten-knight)
+2D top view dungeon crawler puzzle game__
+Itch.io Download + Page: [The Forgotten Knight](https://topchickenturtle.itch.io/the-forgotten-knight)
+
 ![image](https://github.com/JoshLanesmith/TheForgottenKnight/assets/87283172/5d9e418a-ac84-48a6-b97e-04322d6d331d)
 
 
