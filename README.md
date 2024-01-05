@@ -48,19 +48,19 @@ Miles Purvis and Josh Lanesmith students at Conestoga College in the Computer Pr
 ## Acknowledgements
 
 ### Images and Asset Packs
-[Knight Walk Sprite Sheet](https://pixel-boy.itch.io/ninja-adventure-asset-pack)
-[2D Pixel Dungeon Asset Pack](https://pixel-poem.itch.io/dungeon-assetpuck)
-[UI Button](https://opengameart.org/content/ui-button)
-[Keyboard](https://cazwolf.itch.io/caz-pixel-keyboard)
-[Bing Image Creator](https://www.bing.com/images/create/looking-over-a-knights-shoulder-offset-to-the-left/1-656e4fc470434539a58000641528948a?id=QlCTUztxmSRx1GT9Uzj0eg%3d%3d&view=detailv2&idpp=genimg&FORM=GCRIDP&mode=overlay) - Used for serval background images.
-[Little Miss Loudon - Font](https://www.fontspace.com/little-miss-loudon-font-f40426)
+- [Knight Walk Sprite Sheet](https://pixel-boy.itch.io/ninja-adventure-asset-pack)
+- [2D Pixel Dungeon Asset Pack](https://pixel-poem.itch.io/dungeon-assetpuck)
+- [UI Button](https://opengameart.org/content/ui-button)
+- [Keyboard](https://cazwolf.itch.io/caz-pixel-keyboard)
+- [Bing Image Creator](https://www.bing.com/images/create/looking-over-a-knights-shoulder-offset-to-the-left/1-656e4fc470434539a58000641528948a?id=QlCTUztxmSRx1GT9Uzj0eg%3d%3d&view=detailv2&idpp=genimg&FORM=GCRIDP&mode=overlay) - Used for serval background images.
+- [Little Miss Loudon - Font](https://www.fontspace.com/little-miss-loudon-font-f40426)
 
 ### Music and Sound Effects
-[Music by xDeviruchi](https://xdeviruchi.itch.io/8-bit-fantasy-adventure-music-pack)
-[Interface SFX Pack](https://obsydianx.itch.io/interface-sfx-pack-1)
-[Minifantasy - Dungeon Audio Pack](https://leohpaz.itch.io/minifantasy-dungeon-sfx-pack)
-[8-Bit Coin Sound Effect](https://creatorassets.com/a/8-bit-coin-sound-effects)
+- [Music by xDeviruchi](https://xdeviruchi.itch.io/8-bit-fantasy-adventure-music-pack)
+- [Interface SFX Pack](https://obsydianx.itch.io/interface-sfx-pack-1)
+- [Minifantasy - Dungeon Audio Pack](https://leohpaz.itch.io/minifantasy-dungeon-sfx-pack)
+- [8-Bit Coin Sound Effect](https://creatorassets.com/a/8-bit-coin-sound-effects)
 
 ### Other
-[Tiled](https://www.mapeditor.org/ ) - Map Editor
-[TilledCS](https://www.nuget.org/packages/TiledCS) - Nuget Pagkage
+- [Tiled](https://www.mapeditor.org/ ) - Map Editor
+- [TilledCS](https://www.nuget.org/packages/TiledCS) - Nuget Pagkage
